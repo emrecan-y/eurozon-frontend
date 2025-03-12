@@ -3,10 +3,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import SvgLoader from "@/components/SvgLoader";
 import MotionButton from "./ui/MotionButton";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [searchText, setSearchText] = useState("");
+
+  const navigate = useNavigate();
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
@@ -15,16 +18,19 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="fixed top-0 z-20 h-fit w-screen text-white">
-      <div className="grid grid-cols-3 gap-1 bg-gray-500 pb-1">
+    <div className="text-primary-text sticky top-0 z-20 h-fit w-screen">
+      <div className="bg-primary-bg grid grid-cols-3 gap-1 pb-1">
         <p className="flex items-center pl-2 text-3xl">eurozon.de</p>
         <div className="col-span-2 flex w-full items-center justify-end gap-3 pr-2">
-          <MotionButton>
-            <SvgLoader svg="user" className="h-7 w-7 fill-white" />
+          <MotionButton onClick={() => navigate("/login")}>
+            <SvgLoader svg="user" className="fill-primary-text h-7 w-7" />
           </MotionButton>
 
           <MotionButton>
-            <SvgLoader svg="shopping-cart" className="h-8 w-8 fill-white" />
+            <SvgLoader
+              svg="shopping-cart"
+              className="fill-primary-text h-8 w-8"
+            />
           </MotionButton>
         </div>
         <div className="flex items-center">
@@ -32,7 +38,7 @@ function Navbar() {
             <AnimatePresence>
               <MotionButton
                 key={`burger-menu-icon-${showMenu}`}
-                className="absolute top-0 left-0"
+                className="absolute left-0 top-0"
                 onClick={() => setShowMenu((prev) => !prev)}
                 initial={
                   isFirstLoad
@@ -45,16 +51,16 @@ function Navbar() {
               >
                 <SvgLoader
                   svg={showMenu ? "x" : "burger-menu"}
-                  className="h-full w-full fill-white stroke-white"
+                  className="fill-primary-text stroke-primary-text h-full w-full"
                 />
               </MotionButton>
             </AnimatePresence>
           </div>
           <p className="text-xs">Categories</p>
         </div>
-        <div className="col-span-2 flex w-full rounded-full border-2 px-2 py-0.5">
+        <div className="border-primary-text col-span-2 flex w-full rounded-full border-2 px-2 py-0.5">
           <input
-            className="h-full w-full p-0 text-xs outline-0"
+            className="bg-primary-bg h-full w-full p-0 text-xs outline-none"
             type="text"
             placeholder="Search.."
             value={searchText}
@@ -67,12 +73,15 @@ function Navbar() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "linear" }}
             >
-              <SvgLoader svg="x" className="h-7 w-7 stroke-white" />
+              <SvgLoader svg="x" className="stroke-primary-text h-7 w-7" />
             </MotionButton>
           )}
 
           <MotionButton>
-            <SvgLoader svg="search" className="h-7 w-7 stroke-white p-0.5" />
+            <SvgLoader
+              svg="search"
+              className="stroke-primary-text h-7 w-7 p-0.5"
+            />
           </MotionButton>
         </div>
       </div>

@@ -12,7 +12,7 @@ function NavBarCategoryButton({ category }: NavBarCategoryButtonProps) {
 
   useEffect(() => {
     if (
-      location.pathname === "/products/" &&
+      location.pathname === "/products" &&
       new URLSearchParams(location.search).get("category") === category
     ) {
       setIsCategoryActive(true);
@@ -24,7 +24,9 @@ function NavBarCategoryButton({ category }: NavBarCategoryButtonProps) {
   return (
     <MotionButton
       className={isCategoryActive ? "text-primary-bg" : undefined}
-      onClick={() => navigate(`/products/?category=${category}`)}
+      onClick={() =>
+        navigate("/products?" + new URLSearchParams([["category", category]]))
+      }
     >
       {category}
     </MotionButton>

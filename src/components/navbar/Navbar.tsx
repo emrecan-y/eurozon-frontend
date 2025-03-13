@@ -29,6 +29,13 @@ function Navbar() {
     setShowMenu(false);
   }, [location]);
 
+  function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    navigate(
+      "/products?" + new URLSearchParams([["searchString", searchText]]),
+    );
+  }
+
   return (
     <TooltipProvider>
       <div className="sticky top-0 z-20 h-fit w-screen text-primary-text">
@@ -114,7 +121,10 @@ function Navbar() {
             </div>
             <p className="text-xs">Categories</p>
           </div>
-          <div className="col-span-2 flex w-full rounded-full border-2 border-primary-text px-2 py-0.5 md:col-span-1 md:col-start-2 md:row-start-1">
+          <form
+            onSubmit={(e) => searchSubmit(e)}
+            className="col-span-2 flex w-full rounded-full border-2 border-primary-text px-2 py-0.5 md:col-span-1 md:col-start-2 md:row-start-1"
+          >
             <input
               className="h-full w-full bg-primary-bg p-0 text-xs outline-none"
               type="text"
@@ -145,7 +155,7 @@ function Navbar() {
 
             <Tooltip>
               <TooltipTrigger asChild className="w-fit">
-                <MotionButton>
+                <MotionButton type="submit">
                   <SvgLoader
                     svg="search"
                     className="h-7 w-7 stroke-primary-text p-0.5"
@@ -156,7 +166,7 @@ function Navbar() {
                 <p>Search</p>
               </TooltipContent>
             </Tooltip>
-          </div>
+          </form>
         </div>
         <div className="relative -z-10 md:hidden">
           <AnimatePresence>

@@ -27,13 +27,13 @@ function RegisterPage() {
   };
 
   return (
-    <Card className="mt-4 h-fit overflow-hidden py-4 md:mt-20">
+    <Card className="my-8 h-fit w-max self-center overflow-hidden py-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-3 p-6 md:grid-cols-2 md:gap-4"
+          className="grid grid-cols-1 gap-3 p-6 md:grid-cols-2"
         >
-          <div className="mb-4 flex flex-col items-center text-center md:col-span-2 md:mb-8">
+          <div className="mb-2 flex flex-col items-center text-center md:col-span-2">
             <h1 className="text-xl font-bold">Welcome to eurozon!</h1>
             <p className="text-muted-foreground text-balance">
               Create a new account
@@ -205,7 +205,7 @@ function RegisterPage() {
           />
 
           <MotionButton
-            className="bg-primary-bg text-primary-text w-full rounded-lg py-2 md:col-span-2 md:my-4"
+            className="bg-primary-bg text-primary-text w-full rounded-lg py-2 md:col-span-2 md:mt-4"
             type="submit"
           >
             Register

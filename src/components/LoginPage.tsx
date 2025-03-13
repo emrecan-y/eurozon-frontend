@@ -27,10 +27,10 @@ function LoginPage() {
   };
 
   return (
-    <Card className="mt-20 h-fit overflow-hidden py-4 sm:mt-32">
+    <Card className="h-fit self-center overflow-hidden py-4">
       <Form {...form}>
         <form
-          className="flex flex-col gap-3 p-6 md:gap-4"
+          className="flex flex-col gap-3 p-6"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="flex flex-col items-center text-center">

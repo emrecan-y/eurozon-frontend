@@ -27,7 +27,7 @@ function RegisterPage() {
   };
 
   return (
-    <Card className="my-8 h-fit w-max self-center overflow-hidden py-4">
+    <Card className="mb-12 h-fit w-max self-center overflow-hidden py-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -205,7 +205,7 @@ function RegisterPage() {
           />
 
           <MotionButton
-            className="bg-primary-bg text-primary-text w-full rounded-lg py-2 md:col-span-2 md:mt-4"
+            className="w-full rounded-lg bg-primary-bg py-2 text-primary-text md:col-span-2 md:mt-4"
             type="submit"
           >
             Register

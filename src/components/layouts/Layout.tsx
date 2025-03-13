@@ -7,7 +7,8 @@ function Layout() {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <div className="flex flex-1">
-        <div className="sticky hidden bg-red-600 md:flex md:flex-col">
+        <div className="hidden md:flex md:flex-col md:items-start md:gap-1 md:pl-2 md:pt-1">
+          <p className="font-bold">Kategorien</p>
           <NavBarCategories />
         </div>
         <div className="flex flex-1 flex-col items-center justify-center">

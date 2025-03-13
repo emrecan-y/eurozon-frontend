@@ -1,9 +1,9 @@
-import { AnimatePresence, motion, MotionConfig } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { useEffect, useState } from "react";
 import SvgLoader from "@/components/SvgLoader";
 import MotionButton from "../ui/MotionButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   TooltipProvider,
   Tooltip,
@@ -17,6 +17,7 @@ function Navbar() {
   const [searchText, setSearchText] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
@@ -24,10 +25,14 @@ function Navbar() {
     setIsFirstLoad(false);
   }, []);
 
+  useEffect(() => {
+    setShowMenu(false);
+  }, [location]);
+
   return (
     <TooltipProvider>
       <div className="sticky top-0 z-20 h-fit w-screen text-primary-text">
-        <div className="grid grid-cols-3 gap-1 bg-primary-bg pb-1">
+        <div className="grid grid-cols-3 gap-1 bg-primary-bg p-0.5 md:p-3">
           <Tooltip>
             <TooltipTrigger asChild className="w-fit">
               <MotionButton
@@ -43,7 +48,7 @@ function Navbar() {
             </TooltipContent>
           </Tooltip>
 
-          <div className="col-span-2 flex w-full items-center justify-end gap-3 pr-2">
+          <div className="col-span-1 col-start-3 flex w-full items-center justify-end gap-3 pr-2">
             <Tooltip>
               <TooltipTrigger asChild className="w-fit">
                 <MotionButton onClick={() => navigate("/login")}>
@@ -109,7 +114,7 @@ function Navbar() {
             </div>
             <p className="text-xs">Categories</p>
           </div>
-          <div className="col-span-2 flex w-full rounded-full border-2 border-primary-text px-2 py-0.5 md:col-span-1 md:col-start-2">
+          <div className="col-span-2 flex w-full rounded-full border-2 border-primary-text px-2 py-0.5 md:col-span-1 md:col-start-2 md:row-start-1">
             <input
               className="h-full w-full bg-primary-bg p-0 text-xs outline-none"
               type="text"
@@ -158,7 +163,7 @@ function Navbar() {
             {showMenu && (
               <motion.div
                 key={`burger-menu-${showMenu}`}
-                className="absolute w-full bg-amber-600 text-black"
+                className="absolute flex w-full flex-col items-start gap-1 bg-amber-600 p-2 text-black"
                 initial={{ opacity: 0, top: "-100px" }}
                 exit={{ opacity: 0, top: "-100px" }}
                 animate={{ opacity: 1, top: "0" }}

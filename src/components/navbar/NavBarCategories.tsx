@@ -1,11 +1,13 @@
+import NavBarCategoryButton from "./NavBarCategoryButton";
+
 function NavBarCategories() {
+  const categories = ["Technik", "Kleidung", "Lebensmittel", "Sport", "Haus"];
+
   return (
     <>
-      <p>Category1</p>
-      <p>Category2</p>
-      <p>Category3</p>
-      <p>Category4</p>
-      <p>Category5</p>
+      {categories.map((c) => (
+        <NavBarCategoryButton category={c} />
+      ))}
     </>
   );
 }

@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
 import HomePage from "./components/HomePage";
 import useDarkMode from "./components/hooks/useDarkMode";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import MotionButton from "./components/ui/MotionButton";
+import Layout from "./components/layouts/Layout";
+import LoginLayout from "./components/layouts/LoginLayout";
 
 function App() {
   const { toggleDarkMode } = useDarkMode();
@@ -15,6 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
+          </Route>
+          <Route path="/" element={<LoginLayout />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Route>

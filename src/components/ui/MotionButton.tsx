@@ -5,7 +5,7 @@ import {
   Transition,
   VariantLabels,
 } from "motion/react";
-import { MouseEventHandler } from "react";
+import { forwardRef, MouseEventHandler } from "react";
 
 type MotionButtonProps = {
   id?: string;
@@ -23,53 +23,65 @@ type MotionButtonProps = {
   whileTap?: VariantLabels | TargetAndTransition;
 };
 
-function MotionButton({
-  id,
-  className,
-  onClick,
-  children,
-  type = "button",
-  initial,
-  exit,
-  animate,
-  transition,
-  disableAnimation,
-  layout,
-  whileHover = {
-    scale: 1.08,
-    transition: { duration: 0.15 },
+const MotionButton = forwardRef<HTMLButtonElement, MotionButtonProps>(
+  (
+    {
+      id,
+      className = "",
+      onClick,
+      children,
+      type = "button",
+      initial,
+      exit,
+      animate,
+      transition,
+      disableAnimation,
+      layout,
+      whileHover = {
+        scale: 1.08,
+        transition: { duration: 0.15 },
+      },
+      whileTap = {
+        scale: 0.92,
+        transition: { duration: 0.15 },
+      },
+    }: MotionButtonProps,
+    ref,
+  ) => {
+    className += " hover:cursor-pointer";
+    if (disableAnimation) {
+      return (
+        <button
+          ref={ref}
+          id={id}
+          className={className}
+          onClick={onClick}
+          type={type}
+        >
+          {children}
+        </button>
+      );
+    } else {
+      return (
+        <motion.button
+          ref={ref}
+          id={id}
+          className={className}
+          onClick={onClick}
+          type={type}
+          whileHover={whileHover}
+          whileTap={whileTap}
+          initial={initial}
+          exit={exit}
+          animate={animate}
+          transition={transition}
+          layout={layout}
+        >
+          {children}
+        </motion.button>
+      );
+    }
   },
-  whileTap = {
-    scale: 0.92,
-    transition: { duration: 0.15 },
-  },
-}: MotionButtonProps) {
-  className += " hover:cursor-pointer";
-  if (disableAnimation) {
-    return (
-      <button id={id} className={className} onClick={onClick} type={type}>
-        {children}
-      </button>
-    );
-  } else {
-    return (
-      <motion.button
-        id={id}
-        className={className}
-        onClick={onClick}
-        type={type}
-        whileHover={whileHover}
-        whileTap={whileTap}
-        initial={initial}
-        exit={exit}
-        animate={animate}
-        transition={transition}
-        layout={layout}
-      >
-        {children}
-      </motion.button>
-    );
-  }
-}
+);
 
 export default MotionButton;

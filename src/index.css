@@ -5,11 +5,17 @@
 :root {
   --primary-bg: yellow;
   --primary-text: blue;
+
+  --tooltip-text: black;
+  --tooltip-bg: grey;
 }
 
 .dark {
   --primary-bg: blue;
   --primary-text: yellow;
+
+  --tooltip-text: white;
+  --tooltip-bg: black;
 }
 
 /*

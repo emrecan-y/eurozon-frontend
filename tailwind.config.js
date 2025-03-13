@@ -7,6 +7,8 @@ export default {
       colors: {
         "primary-bg": "var(--primary-bg)",
         "primary-text": "var(--primary-text)",
+        "tooltip-bg": "var(--tooltip-bg)",
+        "tooltip-text": "var(--tooltip-text)",
       },
     },
   },

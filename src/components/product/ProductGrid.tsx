@@ -8,10 +8,14 @@ function ProductGrid() {
   const queryClient = useQueryClient();
   const location = useLocation();
   const [category, setCategory] = useState<string | undefined>(undefined);
+  const [searchString, setSearchString] = useState<string | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     setCategory(queryParams.get("category") ?? undefined);
+    setSearchString(queryParams.get("searchString") ?? undefined);
   }, [location.search]);
 
   const productListQuery = useQuery({
@@ -31,8 +35,18 @@ function ProductGrid() {
 
   return (
     <>
-      {category && <p>Kategorie: {category}</p>}
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="col-span-full">
+          <p>
+            {searchString && category
+              ? `Suche für: ${searchString} in Kategorie: ${category}`
+              : category
+                ? `Kategorie: ${category}`
+                : searchString
+                  ? `Suche für: ${searchString}`
+                  : ""}
+          </p>
+        </div>
         {productListQuery.data.map(() => (
           <ProductGridView></ProductGridView>
         ))}

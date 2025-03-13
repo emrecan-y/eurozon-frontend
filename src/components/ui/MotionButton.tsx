@@ -45,6 +45,7 @@ const MotionButton = forwardRef<HTMLButtonElement, MotionButtonProps>(
         scale: 0.92,
         transition: { duration: 0.15 },
       },
+      ...props
     }: MotionButtonProps,
     ref,
   ) => {
@@ -57,6 +58,7 @@ const MotionButton = forwardRef<HTMLButtonElement, MotionButtonProps>(
           className={className}
           onClick={onClick}
           type={type}
+          {...props}
         >
           {children}
         </button>
@@ -76,6 +78,7 @@ const MotionButton = forwardRef<HTMLButtonElement, MotionButtonProps>(
           animate={animate}
           transition={transition}
           layout={layout}
+          {...props}
         >
           {children}
         </motion.button>

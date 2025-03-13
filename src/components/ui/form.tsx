@@ -78,7 +78,7 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
     <FormItemContext.Provider value={{ id }}>
       <div
         data-slot="form-item"
-        className={cn("flex h-16 w-56 flex-col gap-1 md:w-72", className)}
+        className={cn("flex h-16 w-56 flex-col md:w-72", className)}
         {...props}
       />
     </FormItemContext.Provider>
@@ -95,7 +95,7 @@ function FormLabel({
     <Label
       data-slot="form-label"
       data-error={!!error}
-      className={cn("", className)}
+      className={cn("mb-1", className)}
       htmlFor={formItemId}
       {...props}
     />

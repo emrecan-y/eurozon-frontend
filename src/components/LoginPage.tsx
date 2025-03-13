@@ -27,7 +27,7 @@ function LoginPage() {
   };
 
   return (
-    <Card className="h-fit self-center overflow-hidden py-4">
+    <Card className="h-fit self-center overflow-hidden py-4 md:my-2">
       <Form {...form}>
         <form
           className="flex flex-col gap-3 p-6"
@@ -67,7 +67,7 @@ function LoginPage() {
           />
           <MotionButton
             type="submit"
-            className="bg-primary-bg text-primary-text w-full rounded-lg py-2"
+            className="w-full rounded-lg bg-primary-bg py-2 text-primary-text"
           >
             Login
           </MotionButton>

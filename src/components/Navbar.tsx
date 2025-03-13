@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
 import { useEffect, useState } from "react";
 import SvgLoader from "@/components/SvgLoader";
@@ -20,7 +20,13 @@ function Navbar() {
   return (
     <div className="text-primary-text sticky top-0 z-20 h-fit w-screen">
       <div className="bg-primary-bg grid grid-cols-3 gap-1 pb-1">
-        <p className="flex items-center pl-2 text-3xl">eurozon.de</p>
+        <MotionButton
+          onClick={() => navigate("/")}
+          className="w-fit pl-2 text-3xl"
+          whileHover={{}}
+        >
+          eurozon.de
+        </MotionButton>
         <div className="col-span-2 flex w-full items-center justify-end gap-3 pr-2">
           <MotionButton onClick={() => navigate("/login")}>
             <SvgLoader svg="user" className="fill-primary-text h-7 w-7" />

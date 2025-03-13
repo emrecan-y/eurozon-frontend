@@ -7,11 +7,16 @@ import MotionButton from "./components/ui/MotionButton";
 import Layout from "./components/layouts/Layout";
 import LoginLayout from "./components/layouts/LoginLayout";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
 function App() {
+  const queryClient = new QueryClient();
+
   const { toggleDarkMode } = useDarkMode();
 
   return (
     <>
+      <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -23,6 +28,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </QueryClientProvider>
 
       <MotionButton className="bg-primary-bg" onClick={toggleDarkMode}>
         DarkModeToggle

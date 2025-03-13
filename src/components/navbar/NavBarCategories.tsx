@@ -6,7 +6,10 @@ function NavBarCategories() {
   return (
     <>
       {categories.map((c) => (
-        <NavBarCategoryButton category={c} />
+        <NavBarCategoryButton
+          key={"nav-button-" + c.toLowerCase()}
+          category={c}
+        />
       ))}
     </>
   );

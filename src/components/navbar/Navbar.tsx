@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@radix-ui/react-tooltip";
+import NavBarCategories from "./NavBarCategories";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -25,10 +26,10 @@ function Navbar() {
 
   return (
     <TooltipProvider>
-      <div className="text-primary-text sticky top-0 z-20 h-fit w-screen">
-        <div className="bg-primary-bg grid grid-cols-3 gap-1 pb-1">
+      <div className="sticky top-0 z-20 h-fit w-screen text-primary-text">
+        <div className="grid grid-cols-3 gap-1 bg-primary-bg pb-1">
           <Tooltip>
-            <TooltipTrigger className="w-fit">
+            <TooltipTrigger asChild className="w-fit">
               <MotionButton
                 onClick={() => navigate("/")}
                 className="w-fit pl-2 text-3xl"
@@ -37,42 +38,45 @@ function Navbar() {
                 eurozon.de
               </MotionButton>
             </TooltipTrigger>
-            <TooltipContent className="bg-tooltip-bg text-tooltip-text rounded-lg p-1 text-xs">
+            <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
               <p>Homepage</p>
             </TooltipContent>
           </Tooltip>
 
           <div className="col-span-2 flex w-full items-center justify-end gap-3 pr-2">
             <Tooltip>
-              <TooltipTrigger className="w-fit">
+              <TooltipTrigger asChild className="w-fit">
                 <MotionButton onClick={() => navigate("/login")}>
-                  <SvgLoader svg="user" className="fill-primary-text h-7 w-7" />
+                  <SvgLoader svg="user" className="h-7 w-7 fill-primary-text" />
                 </MotionButton>
               </TooltipTrigger>
-              <TooltipContent className="bg-tooltip-bg text-tooltip-text rounded-lg p-1 text-xs">
+              <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
                 <p>User</p>
               </TooltipContent>
             </Tooltip>
 
             <Tooltip>
-              <TooltipTrigger className="w-fit">
+              <TooltipTrigger asChild className="w-fit">
                 <MotionButton>
                   <SvgLoader
                     svg="shopping-cart"
-                    className="fill-primary-text h-8 w-8"
+                    className="h-8 w-8 fill-primary-text"
                   />
                 </MotionButton>
               </TooltipTrigger>
-              <TooltipContent className="bg-tooltip-bg text-tooltip-text rounded-lg p-1 text-xs">
+              <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
                 <p>Shoppingcart</p>
               </TooltipContent>
             </Tooltip>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center md:hidden">
             <div className="relative h-8 w-8">
               <AnimatePresence>
                 <Tooltip>
-                  <TooltipTrigger className="absolute left-0 top-0 w-fit">
+                  <TooltipTrigger
+                    asChild
+                    className="absolute left-0 top-0 w-fit"
+                  >
                     <MotionButton
                       key={`burger-menu-icon-${showMenu}`}
                       onClick={() => setShowMenu((prev) => !prev)}
@@ -93,11 +97,11 @@ function Navbar() {
                     >
                       <SvgLoader
                         svg={showMenu ? "x" : "burger-menu"}
-                        className="fill-primary-text stroke-primary-text h-full w-full"
+                        className="h-full w-full fill-primary-text stroke-primary-text"
                       />
                     </MotionButton>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-tooltip-bg text-tooltip-text rounded-lg p-1 text-xs">
+                  <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
                     <p>{showMenu ? "Close" : "Categories"} </p>
                   </TooltipContent>
                 </Tooltip>
@@ -105,9 +109,9 @@ function Navbar() {
             </div>
             <p className="text-xs">Categories</p>
           </div>
-          <div className="border-primary-text col-span-2 flex w-full rounded-full border-2 px-2 py-0.5">
+          <div className="col-span-2 flex w-full rounded-full border-2 border-primary-text px-2 py-0.5 md:col-span-1 md:col-start-2">
             <input
-              className="bg-primary-bg h-full w-full p-0 text-xs outline-none"
+              className="h-full w-full bg-primary-bg p-0 text-xs outline-none"
               type="text"
               placeholder="Search.."
               value={searchText}
@@ -115,7 +119,7 @@ function Navbar() {
             />
             {searchText !== "" && (
               <Tooltip>
-                <TooltipTrigger className="w-fit">
+                <TooltipTrigger asChild className="w-fit">
                   <MotionButton
                     onClick={() => setSearchText("")}
                     initial={{ opacity: 0, scale: 0 }}
@@ -124,32 +128,32 @@ function Navbar() {
                   >
                     <SvgLoader
                       svg="x"
-                      className="stroke-primary-text h-7 w-7"
+                      className="h-7 w-7 stroke-primary-text"
                     />
                   </MotionButton>
                 </TooltipTrigger>
-                <TooltipContent className="bg-tooltip-bg text-tooltip-text rounded-lg p-1 text-xs">
+                <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
                   <p>Delete Entry</p>
                 </TooltipContent>
               </Tooltip>
             )}
 
             <Tooltip>
-              <TooltipTrigger className="w-fit">
+              <TooltipTrigger asChild className="w-fit">
                 <MotionButton>
                   <SvgLoader
                     svg="search"
-                    className="stroke-primary-text h-7 w-7 p-0.5"
+                    className="h-7 w-7 stroke-primary-text p-0.5"
                   />
                 </MotionButton>
               </TooltipTrigger>
-              <TooltipContent className="bg-tooltip-bg text-tooltip-text rounded-lg p-1 text-xs">
+              <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
                 <p>Search</p>
               </TooltipContent>
             </Tooltip>
           </div>
         </div>
-        <div className="relative -z-10">
+        <div className="relative -z-10 md:hidden">
           <AnimatePresence>
             {showMenu && (
               <motion.div
@@ -160,11 +164,7 @@ function Navbar() {
                 animate={{ opacity: 1, top: "0" }}
                 transition={{ type: "linear" }}
               >
-                <p>Category1</p>
-                <p>Category2</p>
-                <p>Category3</p>
-                <p>Category4</p>
-                <p>Category5</p>
+                <NavBarCategories />
               </motion.div>
             )}
           </AnimatePresence>

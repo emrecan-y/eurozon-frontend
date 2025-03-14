@@ -9,3 +9,10 @@ export type Product = {
   stock: number;
   category: Category;
 };
+
+export type ProductQueryType = {
+  page?: number;
+  size?: number;
+  category?: string;
+  searchString?: string;
+};

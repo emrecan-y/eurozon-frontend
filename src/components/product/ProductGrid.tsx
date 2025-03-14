@@ -2,41 +2,35 @@ import { mainCategories } from "@/models/category";
 import ProductGridView from "./ProductGridView";
 import { getProducts } from "@/api/api";
 import { useEffect, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
+import { Product, ProductQueryType } from "@/models/product";
 
 function ProductGrid() {
   const queryClient = useQueryClient();
   const location = useLocation();
-  const [category, setCategory] = useState<string | undefined>(undefined);
-  const [searchString, setSearchString] = useState<string | undefined>(
-    undefined,
-  );
+  const [productList, setProductList] = useState<Product[]>();
+
+  const [query, setQuery] = useState<ProductQueryType>({});
+  const { size, page, searchString, category } = query;
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const categoryParam = queryParams.get("category");
-    if (categoryParam !== null) {
-      setCategory(
-        mainCategories.find((cat) => cat === categoryParam) || undefined,
-      );
-    } else {
-      setCategory(undefined);
-    }
-
-    setSearchString(queryParams.get("searchString") ?? undefined);
+    const category =
+      mainCategories.find((cat) => cat === queryParams.get("category")) ||
+      undefined;
+    const searchString = queryParams.get("searchString") ?? undefined;
+    setQuery({ searchString: searchString, category: category });
   }, [location.search]);
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["productList"],
-    queryFn: getProducts,
-  });
-  const { mutate } = useMutation({
-    mutationFn: undefined,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["productList"] });
-    },
-  });
+  useEffect(() => {
+    getProducts({
+      category: query.category,
+      searchString: query.searchString,
+    }).then((e) => {
+      setProductList(e || undefined);
+    });
+  }, [query]);
 
   const emptyArr = Array(20).fill(undefined);
 
@@ -54,10 +48,11 @@ function ProductGrid() {
                   : ""}
           </p>
         </div>
-        {isLoading || isError
+        {!Array.isArray(productList)
           ? emptyArr.map(() => <ProductGridView></ProductGridView>)
-          : Array.isArray(data) &&
-            data.map((p) => <ProductGridView product={p}></ProductGridView>)}
+          : productList.map((p) => (
+              <ProductGridView product={p}></ProductGridView>
+            ))}
       </div>
     </>
   );

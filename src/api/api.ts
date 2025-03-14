@@ -1,4 +1,5 @@
 import { Product, ProductQueryType } from "@/models/product";
+import { LoginUserSchema } from "@/models/user";
 import axios from "axios";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
@@ -24,8 +25,23 @@ export async function getProducts(query?: ProductQueryType) {
     destination += "?" + params.toString();
   }
   return axios
-    .get<Product[]>("/products")
+    .get<Product[]>(destination)
     .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export async function tryLogin(data: Zod.infer<typeof LoginUserSchema>) {
+  return axios
+    .post<string>("/api/auth/login", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
     .catch((error) => {
       console.log(error);
     });

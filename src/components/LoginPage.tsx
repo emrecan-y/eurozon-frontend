@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MotionButton from "./ui/MotionButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginUserSchema } from "@/models/user";
@@ -14,17 +14,38 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
+import { tryLogin } from "@/api/api";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 function LoginPage() {
-  type LoginForm = z.infer<typeof LoginUserSchema>;
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["access_token"]);
 
+  useEffect(() => {
+    if (document.cookie.includes("access_token")) {
+      navigate("/");
+    }
+  }, [cookies["access_token"]]);
+
+  type LoginForm = z.infer<typeof LoginUserSchema>;
   const form = useForm<LoginForm>({
     resolver: zodResolver(LoginUserSchema),
   });
 
-  const onSubmit = (data: LoginForm) => {
-    console.log("User submitted:", data);
+  const onSubmit = (loginDate: LoginForm) => {
+    tryLogin(loginDate).then((accessToken) => {
+      if (accessToken) {
+        setJwtCookie(accessToken);
+      }
+    });
   };
+
+  function setJwtCookie(accessToken: string) {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 1);
+    setCookie("access_token", accessToken, { expires: expirationDate });
+  }
 
   return (
     <Card className="h-fit self-center overflow-hidden py-4 md:my-2">

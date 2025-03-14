@@ -9,6 +9,7 @@ import LoginLayout from "./components/layouts/LoginLayout";
 import ProductGrid from "./components/product/ProductGrid";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   const queryClient = new QueryClient();
@@ -17,20 +18,22 @@ function App() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="/products" element={<ProductGrid />} />
-            </Route>
-            <Route path="/" element={<LoginLayout />}>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
+      <CookiesProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route path="/products" element={<ProductGrid />} />
+              </Route>
+              <Route path="/" element={<LoginLayout />}>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </CookiesProvider>
 
       <MotionButton className="bg-primary-bg" onClick={toggleDarkMode}>
         DarkModeToggle

@@ -12,7 +12,7 @@ function LoginLayout() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="flex flex-1 flex-col items-center justify-center">
+      <div className="my-8 flex flex-1 flex-col items-center justify-center md:my-4">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild className="w-fit">

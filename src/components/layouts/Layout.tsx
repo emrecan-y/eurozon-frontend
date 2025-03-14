@@ -11,7 +11,7 @@ function Layout() {
           <p className="font-bold">Kategorien</p>
           <NavBarCategories />
         </div>
-        <div className="flex flex-1 flex-col items-center justify-center">
+        <div className="flex flex-1 flex-col">
           <Outlet />
         </div>
       </div>

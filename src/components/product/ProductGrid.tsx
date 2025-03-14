@@ -2,7 +2,7 @@ import { mainCategories } from "@/models/category";
 import ProductGridView from "./ProductGridView";
 import { getProducts } from "@/api/api";
 import { useEffect, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 
 function ProductGrid() {
@@ -27,7 +27,7 @@ function ProductGrid() {
     setSearchString(queryParams.get("searchString") ?? undefined);
   }, [location.search]);
 
-  const productListQuery = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["productList"],
     queryFn: getProducts,
   });
@@ -38,13 +38,11 @@ function ProductGrid() {
     },
   });
 
-  if (!productListQuery.data) {
-    productListQuery.data = Array(20).fill(undefined);
-  }
+  const emptyArr = Array(20).fill(undefined);
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid h-11 w-full grid-cols-1 gap-2 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
         <div className="col-span-full">
           <p>
             {searchString && category
@@ -56,9 +54,10 @@ function ProductGrid() {
                   : ""}
           </p>
         </div>
-        {productListQuery.data.map(() => (
-          <ProductGridView></ProductGridView>
-        ))}
+        {isLoading || isError
+          ? emptyArr.map(() => <ProductGridView></ProductGridView>)
+          : Array.isArray(data) &&
+            data.map((p) => <ProductGridView product={p}></ProductGridView>)}
       </div>
     </>
   );

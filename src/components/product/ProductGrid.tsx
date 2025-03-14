@@ -1,3 +1,4 @@
+import { mainCategories } from "@/models/category";
 import ProductGridView from "./ProductGridView";
 import { getProducts } from "@/api/api";
 import { useEffect, useState } from "react";
@@ -14,7 +15,15 @@ function ProductGrid() {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    setCategory(queryParams.get("category") ?? undefined);
+    const categoryParam = queryParams.get("category");
+    if (categoryParam !== null) {
+      setCategory(
+        mainCategories.find((cat) => cat === categoryParam) || undefined,
+      );
+    } else {
+      setCategory(undefined);
+    }
+
     setSearchString(queryParams.get("searchString") ?? undefined);
   }, [location.search]);
 

@@ -8,7 +8,7 @@ import Layout from "./components/layouts/Layout";
 import LoginLayout from "./components/layouts/LoginLayout";
 import ProductGrid from "./components/product/ProductGrid";
 
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const queryClient = new QueryClient();

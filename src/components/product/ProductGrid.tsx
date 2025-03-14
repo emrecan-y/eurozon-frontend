@@ -2,12 +2,10 @@ import { mainCategories } from "@/models/category";
 import ProductGridView from "./ProductGridView";
 import { getProducts } from "@/api/api";
 import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import { Product, ProductQueryType } from "@/models/product";
 
 function ProductGrid() {
-  const queryClient = useQueryClient();
   const location = useLocation();
   const [productList, setProductList] = useState<Product[]>();
 

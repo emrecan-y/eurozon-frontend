@@ -11,30 +11,21 @@ import {
   TooltipContent,
 } from "@radix-ui/react-tooltip";
 import NavBarCategories from "./NavBarCategories";
+import NavBarSearchBar from "./NavBarSearchBar";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
-  const [searchText, setSearchText] = useState("");
-
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
-
   useEffect(() => {
     setIsFirstLoad(false);
   }, []);
 
+  const location = useLocation();
   useEffect(() => {
     setShowMenu(false);
   }, [location]);
-
-  function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    navigate(
-      "/products?" + new URLSearchParams([["searchString", searchText]]),
-    );
-  }
 
   return (
     <TooltipProvider>
@@ -121,52 +112,7 @@ function Navbar() {
             </div>
             <p className="text-xs">Categories</p>
           </div>
-          <form
-            onSubmit={(e) => searchSubmit(e)}
-            className="col-span-2 flex w-full rounded-full border-2 border-primary-text px-2 py-0.5 md:col-span-1 md:col-start-2 md:row-start-1"
-          >
-            <input
-              className="h-full w-full bg-primary-bg p-0 text-xs outline-none"
-              type="text"
-              placeholder="Search.."
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            {searchText !== "" && (
-              <Tooltip>
-                <TooltipTrigger asChild className="w-fit">
-                  <MotionButton
-                    onClick={() => setSearchText("")}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: "linear" }}
-                  >
-                    <SvgLoader
-                      svg="x"
-                      className="h-7 w-7 stroke-primary-text"
-                    />
-                  </MotionButton>
-                </TooltipTrigger>
-                <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
-                  <p>Delete Entry</p>
-                </TooltipContent>
-              </Tooltip>
-            )}
-
-            <Tooltip>
-              <TooltipTrigger asChild className="w-fit">
-                <MotionButton type="submit">
-                  <SvgLoader
-                    svg="search"
-                    className="h-7 w-7 stroke-primary-text p-0.5"
-                  />
-                </MotionButton>
-              </TooltipTrigger>
-              <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
-                <p>Search</p>
-              </TooltipContent>
-            </Tooltip>
-          </form>
+          <NavBarSearchBar />
         </div>
         <div className="relative -z-10 md:hidden">
           <AnimatePresence>

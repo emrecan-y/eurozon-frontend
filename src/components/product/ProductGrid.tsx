@@ -47,9 +47,13 @@ function ProductGrid() {
           </p>
         </div>
         {!Array.isArray(productList)
-          ? emptyArr.map(() => <ProductGridView></ProductGridView>)
+          ? emptyArr.map((e, index) => (
+              <ProductGridView
+                key={`product-skeleton-${index}`}
+              ></ProductGridView>
+            ))
           : productList.map((p) => (
-              <ProductGridView product={p}></ProductGridView>
+              <ProductGridView product={p} key={p.id}></ProductGridView>
             ))}
       </div>
     </>

@@ -1,15 +1,21 @@
-import { mainCategories } from "@/models/category";
 import NavBarCategoryButton from "./NavBarCategoryButton";
+import { useQuery } from "@tanstack/react-query";
+import { getMainCategories } from "@/api/api";
 
 function NavBarCategories() {
+  const query = useQuery({
+    queryKey: ["mainCategories"],
+    queryFn: getMainCategories,
+  });
   return (
     <>
-      {mainCategories.map((c) => (
-        <NavBarCategoryButton
-          key={"nav-button-" + c.toLowerCase()}
-          category={c}
-        />
-      ))}
+      {query.data &&
+        query.data.map((c) => (
+          <NavBarCategoryButton
+            key={"nav-button-" + c.name.toLowerCase()}
+            category={c.name}
+          />
+        ))}
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Category } from "@/models/category";
 import { Product, ProductQueryType } from "@/models/product";
 import { LoginUserSchema } from "@/models/user";
 import axios from "axios";
@@ -42,6 +43,15 @@ export async function tryLogin(data: Zod.infer<typeof LoginUserSchema>) {
     .then((response) => {
       return response.data;
     })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export async function getMainCategories() {
+  return axios
+    .get<Category[]>("/categories/main")
+    .then((response) => response.data)
     .catch((error) => {
       console.log(error);
     });

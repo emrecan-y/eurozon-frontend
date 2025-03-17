@@ -19,6 +19,11 @@ function NavBarSearchBar() {
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
+  const query = useQuery({
+    queryKey: ["mainCategories"],
+    queryFn: getMainCategories,
+  });
+
   function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (searchText !== "") {
@@ -56,14 +61,26 @@ function NavBarSearchBar() {
           </SelectTrigger>
           <SelectContent className="bg-primary-bg">
             <SelectGroup>
-              <SelectLabel>Kategorien</SelectLabel>
-              {mainCategories.map((cat) => (
+              <SelectItem
+                key={`search-bar-category-all`}
+                value="all"
+                className="font-bold hover:cursor-pointer [&_svg]:flex"
+              >
+                {category === "" && (
+                  <span className="absolute right-2 top-2.5 flex size-3.5 items-center justify-center">
+                    <CheckIcon className="size-4" />
+                  </span>
+                )}
+                Alle Kategorien
+              </SelectItem>
+              {Array.isArray(query.data) &&
+                query.data.map((cat) => (
                 <SelectItem
-                  key={`search-bar-category-${cat.toLowerCase()}`}
-                  value={cat}
+                    key={`search-bar-category-${cat.name.toLowerCase()}`}
+                    value={cat.name}
                   className="hover:cursor-pointer"
                 >
-                  {cat}
+                    {cat.name}
                 </SelectItem>
               ))}
             </SelectGroup>

@@ -105,7 +105,6 @@ function Navbar() {
                         }}
                       >
                         Anmelden
-                        {userQuery.data?.name + " " + userQuery?.data?.surname}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => {

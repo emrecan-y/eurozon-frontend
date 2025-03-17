@@ -14,7 +14,7 @@ export type User = {
   address: Address;
 };
 
-export const UserSchema = z
+export const RegisterUserSchema = z
   .object({
     email: z
       .string()

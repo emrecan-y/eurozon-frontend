@@ -17,13 +17,17 @@ import {
 import { tryLogin } from "@/api/api";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { useQueryClient } from "@tanstack/react-query";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["access_token"]);
+  const queryClient = useQueryClient();
+
+  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
   useEffect(() => {
-    if (document.cookie.includes("access_token")) {
+    if (cookies.access_token) {
+      queryClient.invalidateQueries(["user"]);
       navigate("/");
     }
   }, [cookies["access_token"]]);
@@ -68,7 +72,7 @@ function LoginPage() {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3 w-full"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="email"
                     placeholder="Email"
                     {...field}
@@ -86,7 +90,7 @@ function LoginPage() {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3 w-full"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="password"
                     placeholder="Password"
                     {...field}
@@ -98,7 +102,7 @@ function LoginPage() {
           />
           <MotionButton
             type="submit"
-            className="bg-primary-bg-1 text-accent-1 w-full rounded-lg py-2"
+            className="bg-accent-2 text-primary-bg-2 w-full rounded-lg py-2"
           >
             Login
           </MotionButton>

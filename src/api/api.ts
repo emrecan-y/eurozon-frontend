@@ -1,6 +1,7 @@
 import { Category } from "@/models/category";
 import { Product, ProductQueryType } from "@/models/product";
-import { LoginUserSchema } from "@/models/user";
+import { LoginUserSchema, RegisterUserSchema } from "@/models/user";
+import { getCookie } from "@/util/util";
 import axios from "axios";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
@@ -38,6 +39,40 @@ export async function tryLogin(data: Zod.infer<typeof LoginUserSchema>) {
     .post<string>("/api/auth/login", data, {
       headers: {
         "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export async function register(data: Zod.infer<typeof RegisterUserSchema>) {
+  return axios
+    .post<string>("api/auth/register", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        true;
+      }
+      return false;
+    })
+    .catch((error) => {
+      console.log(error);
+      return false;
+    });
+}
+
+export async function getUser() {
+  return axios
+    .get<string>("/api/auth/who-am-i", {
+      headers: {
+        Authorization: "Bearer " + getCookie("access_token"),
       },
     })
     .then((response) => {

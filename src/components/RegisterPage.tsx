@@ -11,19 +11,26 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import MotionButton from "./ui/MotionButton";
-import { Link } from "react-router-dom";
-import { UserSchema } from "@/models/user";
+import { Link, useNavigate } from "react-router-dom";
+import { RegisterUserSchema } from "@/models/user";
 import { Card } from "./ui/card";
+import { register } from "@/api/api";
 
-type RegistrationForm = z.infer<typeof UserSchema>;
+type RegistrationForm = z.infer<typeof RegisterUserSchema>;
 
 function RegisterPage() {
+  const navigate = useNavigate();
+
   const form = useForm<RegistrationForm>({
-    resolver: zodResolver(UserSchema),
+    resolver: zodResolver(RegisterUserSchema),
   });
 
   const onSubmit = (data: RegistrationForm) => {
-    console.log("User submitted:", data);
+    register(data).then((response) => {
+      if (response) {
+        navigate("/login");
+      }
+    });
   };
 
   return (
@@ -47,7 +54,7 @@ function RegisterPage() {
                 <FormLabel>Email</FormLabel>
                 <FormControl className="w-full">
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="email"
                     placeholder="Email"
                     {...field}
@@ -66,7 +73,7 @@ function RegisterPage() {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="password"
                     placeholder="Password"
                     {...field}
@@ -85,7 +92,7 @@ function RegisterPage() {
                 <FormLabel>Confirm password</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="password"
                     placeholder="Password"
                     {...field}
@@ -104,7 +111,7 @@ function RegisterPage() {
                 <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Name"
                     {...field}
@@ -123,7 +130,7 @@ function RegisterPage() {
                 <FormLabel>Surname</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Surname"
                     {...field}
@@ -142,7 +149,7 @@ function RegisterPage() {
                 <FormLabel>Street</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Street"
                     {...field}
@@ -161,7 +168,7 @@ function RegisterPage() {
                 <FormLabel>Street Number</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Street Number"
                     {...field}
@@ -180,7 +187,7 @@ function RegisterPage() {
                 <FormLabel>Town</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Town"
                     {...field}
@@ -199,7 +206,7 @@ function RegisterPage() {
                 <FormLabel>Postal Code</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Postal Code"
                     {...field}
@@ -218,7 +225,7 @@ function RegisterPage() {
                 <FormLabel>Country</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Country"
                     {...field}
@@ -237,7 +244,7 @@ function RegisterPage() {
                 <FormLabel>Date of Birth</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-3 text-primary-text-3"
+                    className="bg-primary-bg-1 text-primary-text-1"
                     type="date"
                     value={
                       field.value ? field.value.toISOString().split("T")[0] : ""
@@ -251,7 +258,7 @@ function RegisterPage() {
           />
 
           <MotionButton
-            className="bg-primary-bg-1 text-accent-1 w-full rounded-lg py-2 md:col-span-2"
+            className="bg-accent-2 text-primary-bg-2 w-full rounded-lg py-2 md:col-span-2"
             type="submit"
           >
             Register

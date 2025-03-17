@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import MotionButton from "../ui/MotionButton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -11,18 +11,14 @@ import {
   SelectValue,
 } from "../ui/select";
 import { CheckIcon, Search, X } from "lucide-react";
-import { getMainCategories } from "@/api/api";
-import { useQuery } from "@tanstack/react-query";
+import { QueryContext } from "../context/QueryContext";
 
 function NavBarSearchBar() {
   const [category, setCategory] = useState("");
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
-  const query = useQuery({
-    queryKey: ["mainCategories"],
-    queryFn: getMainCategories,
-  });
+  const { mainCategoriesQuery } = useContext(QueryContext);
 
   function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -79,8 +75,9 @@ function NavBarSearchBar() {
                 )}
                 Alle Kategorien
               </SelectItem>
-              {Array.isArray(query.data) &&
-                query.data.map((cat) => (
+              {mainCategoriesQuery &&
+                Array.isArray(mainCategoriesQuery.data) &&
+                mainCategoriesQuery.data.map((cat) => (
                   <SelectItem
                     key={`search-bar-category-${cat.name.toLowerCase()}`}
                     value={cat.name}

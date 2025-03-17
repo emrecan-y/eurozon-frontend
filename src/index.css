@@ -16,12 +16,6 @@
   --accent-3: rgb(249, 249, 102);
 }
 
-* {
-  -webkit-transition: background-color 100ms ease-in;
-  -ms-transition: background-color 100ms ease-in;
-  transition: background-color 100ms ease-in;
-}
-
 * :focus-visible {
   outline: 2px solid var(--accent-2);
   outline-color: var(--accent-2);

@@ -1,16 +1,14 @@
 import NavBarCategoryButton from "./NavBarCategoryButton";
-import { useQuery } from "@tanstack/react-query";
-import { getMainCategories } from "@/api/api";
+import { QueryContext } from "../context/QueryContext";
+import { useContext } from "react";
 
 function NavBarCategories() {
-  const query = useQuery({
-    queryKey: ["mainCategories"],
-    queryFn: getMainCategories,
-  });
+  const { mainCategoriesQuery } = useContext(QueryContext);
   return (
     <>
-      {query.data &&
-        query.data.map((c) => (
+      {mainCategoriesQuery &&
+        Array.isArray(mainCategoriesQuery.data) &&
+        mainCategoriesQuery.data.map((c) => (
           <NavBarCategoryButton
             key={"nav-button-" + c.name.toLowerCase()}
             category={c.name}

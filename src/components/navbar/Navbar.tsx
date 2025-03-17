@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MotionButton from "../ui/MotionButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -21,11 +21,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { QueryContext } from "../context/QueryContext";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+
+  const { userQuery } = useContext(QueryContext);
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   useEffect(() => {
@@ -74,7 +77,7 @@ function Navbar() {
                   {cookies.access_token ? (
                     <>
                       <DropdownMenuLabel className="border-b-[1px]">
-                        Joachim Admin
+                        {userQuery?.data?.name + " " + userQuery?.data?.surname}
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
@@ -102,6 +105,7 @@ function Navbar() {
                         }}
                       >
                         Anmelden
+                        {userQuery?.data?.name + " " + userQuery?.data?.surname}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => {

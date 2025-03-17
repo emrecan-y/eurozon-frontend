@@ -70,7 +70,7 @@ export async function register(data: Zod.infer<typeof RegisterUserSchema>) {
 
 export async function getUser() {
   return axios
-    .get<string>("/api/auth/who-am-i", {
+    .get<User>("/api/auth/who-am-i", {
       headers: {
         Authorization: "Bearer " + getCookie("access_token"),
       },

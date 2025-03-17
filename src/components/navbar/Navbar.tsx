@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 
 import { useEffect, useState } from "react";
-import SvgLoader from "@/components/SvgLoader";
 import MotionButton from "../ui/MotionButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -12,6 +11,7 @@ import {
 } from "@radix-ui/react-tooltip";
 import NavBarCategories from "./NavBarCategories";
 import NavBarSearchBar from "./NavBarSearchBar";
+import { Menu, ShoppingCart, User, X } from "lucide-react";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -29,19 +29,20 @@ function Navbar() {
 
   return (
     <TooltipProvider>
-      <div className="sticky top-0 z-20 h-fit w-screen text-primary-text">
-        <div className="grid grid-cols-3 gap-1 bg-primary-bg p-0.5 md:p-3">
+      <div className="text-accent-2 shadow-xs sticky top-0 z-20 h-fit w-screen">
+        <div className="bg-primary-bg-2 grid grid-cols-3 gap-1 p-1 md:p-3">
           <Tooltip>
             <TooltipTrigger asChild className="w-fit">
               <MotionButton
                 onClick={() => navigate("/")}
-                className="w-fit pl-2 text-3xl"
+                className="text-primary-text-1 w-fit pl-2 text-3xl"
                 whileHover={{}}
               >
-                eurozon.de
+                eurozon
+                <span className="text-accent-2">.de</span>
               </MotionButton>
             </TooltipTrigger>
-            <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
+            <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
               <p>Homepage</p>
             </TooltipContent>
           </Tooltip>
@@ -50,10 +51,10 @@ function Navbar() {
             <Tooltip>
               <TooltipTrigger asChild className="w-fit">
                 <MotionButton onClick={() => navigate("/login")}>
-                  <SvgLoader svg="user" className="h-7 w-7 fill-primary-text" />
+                  <User className="h-7 w-7" />
                 </MotionButton>
               </TooltipTrigger>
-              <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
+              <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
                 <p>User</p>
               </TooltipContent>
             </Tooltip>
@@ -61,13 +62,10 @@ function Navbar() {
             <Tooltip>
               <TooltipTrigger asChild className="w-fit">
                 <MotionButton>
-                  <SvgLoader
-                    svg="shopping-cart"
-                    className="h-8 w-8 fill-primary-text"
-                  />
+                  <ShoppingCart className="h-7 w-7" />
                 </MotionButton>
               </TooltipTrigger>
-              <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
+              <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
                 <p>Shoppingcart</p>
               </TooltipContent>
             </Tooltip>
@@ -76,10 +74,7 @@ function Navbar() {
             <div className="relative h-8 w-8">
               <AnimatePresence>
                 <Tooltip>
-                  <TooltipTrigger
-                    asChild
-                    className="absolute left-0 top-0 w-fit"
-                  >
+                  <TooltipTrigger asChild className="absolute left-0 top-0">
                     <MotionButton
                       key={`burger-menu-icon-${showMenu}`}
                       onClick={() => setShowMenu((prev) => !prev)}
@@ -98,19 +93,20 @@ function Navbar() {
                       animate={{ opacity: 1, rotate: "0deg" }}
                       transition={{ type: "linear" }}
                     >
-                      <SvgLoader
-                        svg={showMenu ? "x" : "burger-menu"}
-                        className="h-full w-full fill-primary-text stroke-primary-text"
-                      />
+                      {showMenu ? (
+                        <X className="h-8 w-8" />
+                      ) : (
+                        <Menu className="h-8 w-8" />
+                      )}
                     </MotionButton>
                   </TooltipTrigger>
-                  <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
+                  <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
                     <p>{showMenu ? "Close" : "Categories"} </p>
                   </TooltipContent>
                 </Tooltip>
               </AnimatePresence>
             </div>
-            <p className="text-xs">Categories</p>
+            <p className="text-primary-text-1 text-xs">Categories</p>
           </div>
           <NavBarSearchBar />
         </div>
@@ -119,7 +115,7 @@ function Navbar() {
             {showMenu && (
               <motion.div
                 key={`burger-menu-${showMenu}`}
-                className="absolute flex w-full flex-col items-start gap-1 bg-amber-600 p-2 text-black"
+                className="bg-primary-bg-2 text-primary-text-2 absolute flex w-full flex-col items-start gap-1 p-2"
                 initial={{ opacity: 0, top: "-100px" }}
                 exit={{ opacity: 0, top: "-100px" }}
                 animate={{ opacity: 1, top: "0" }}

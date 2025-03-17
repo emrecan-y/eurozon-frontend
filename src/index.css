@@ -3,19 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --primary-bg: yellow;
-  --primary-text: blue;
+  --primary-1: rgb(242, 244, 252);
+  --primary-text-1: rgb(3, 11, 64);
+  --accent-1: rgb(225, 199, 1);
 
-  --tooltip-text: black;
-  --tooltip-bg: grey;
+  --primary-2: rgb(255, 255, 255);
+  --primary-text-2: rgb(3, 11, 40);
+  --accent-2: rgb(245, 225, 85);
+
+  --primary-3: rgb(207, 211, 229);
+  --primary-text-3: rgb(31, 35, 49);
+  --accent-3: rgb(249, 249, 102);
+}
+
+* {
+  -webkit-transition: background-color 100ms ease-in;
+  -ms-transition: background-color 100ms ease-in;
+  transition: background-color 100ms ease-in;
 }
 
 .dark {
-  --primary-bg: blue;
-  --primary-text: yellow;
+  --primary-1: rgb(3, 11, 52);
+  --primary-text-1: #dcdcdd;
+  --accent-1: rgb(245, 225, 85);
 
-  --tooltip-text: white;
-  --tooltip-bg: black;
+  --primary-2: rgb(37, 41, 63);
+  --primary-text-2: rgb(196, 196, 196);
+  --accent-2: rgb(255, 233, 64);
+
+  --primary-3: rgb(53, 53, 88);
+  --primary-text-3: rgb(196, 196, 196);
+  --accent-3: rgb(249, 249, 102);
 }
 
 /*

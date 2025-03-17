@@ -23,7 +23,7 @@ function NavBarCategoryButton({ category }: NavBarCategoryButtonProps) {
 
   return (
     <MotionButton
-      className={isCategoryActive ? "text-primary-bg" : undefined}
+      className={isCategoryActive ? "text-accent-2" : undefined}
       onClick={() =>
         navigate("/products?" + new URLSearchParams([["category", category]]))
       }

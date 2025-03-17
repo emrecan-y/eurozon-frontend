@@ -27,7 +27,7 @@ function RegisterPage() {
   };
 
   return (
-    <Card className="mb-12 h-fit w-max self-center overflow-hidden py-4">
+    <Card className="bg-primary-bg-2 text-primary-text-2 mb-12 h-fit w-max self-center overflow-hidden py-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -47,7 +47,7 @@ function RegisterPage() {
                 <FormLabel>Email</FormLabel>
                 <FormControl className="w-full">
                   <Input
-                    className="w-full"
+                    className="bg-primary-bg-3 text-primary-text-3"
                     type="email"
                     placeholder="Email"
                     {...field}
@@ -65,7 +65,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="password"
+                    placeholder="Password"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,7 +84,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Confirm password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="password"
+                    placeholder="Password"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -93,7 +103,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Name" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="text"
+                    placeholder="Name"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -107,7 +122,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Surname</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Surname" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="text"
+                    placeholder="Surname"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -121,7 +141,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Street</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Street" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="text"
+                    placeholder="Street"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -135,7 +160,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Street Number</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Street Number" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="text"
+                    placeholder="Street Number"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -149,7 +179,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Town</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Town" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="text"
+                    placeholder="Town"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -163,7 +198,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Postal Code</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Postal Code" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="text"
+                    placeholder="Postal Code"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -177,7 +217,12 @@ function RegisterPage() {
               <FormItem>
                 <FormLabel>Country</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Country" {...field} />
+                  <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
+                    type="text"
+                    placeholder="Country"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -192,6 +237,7 @@ function RegisterPage() {
                 <FormLabel>Date of Birth</FormLabel>
                 <FormControl>
                   <Input
+                    className="bg-primary-bg-3 text-primary-text-3"
                     type="date"
                     value={
                       field.value ? field.value.toISOString().split("T")[0] : ""
@@ -205,7 +251,7 @@ function RegisterPage() {
           />
 
           <MotionButton
-            className="w-full rounded-lg bg-primary-bg py-2 text-primary-text md:col-span-2 md:mt-4"
+            className="bg-primary-bg-1 text-accent-1 w-full rounded-lg py-2 md:col-span-2"
             type="submit"
           >
             Register

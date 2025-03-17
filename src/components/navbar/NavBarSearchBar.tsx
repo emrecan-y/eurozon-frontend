@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import SvgLoader from "../SvgLoader";
 import MotionButton from "../ui/MotionButton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { useEffect, useState } from "react";
@@ -8,11 +7,12 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { mainCategories } from "@/models/category";
+import { CheckIcon, Search, X } from "lucide-react";
+import { getMainCategories } from "@/api/api";
+import { useQuery } from "@tanstack/react-query";
 
 function NavBarSearchBar() {
   const [category, setCategory] = useState("");
@@ -52,14 +52,20 @@ function NavBarSearchBar() {
   return (
     <form
       onSubmit={(e) => searchSubmit(e)}
-      className="col-span-2 flex w-full rounded-full border-2 border-primary-text px-2 py-0.5 md:col-span-1 md:col-start-2 md:row-start-1"
+      className="bg-primary-bg-1 text-primary-text-1 border-primary-bg-1 col-span-2 flex w-full rounded-full border-2 px-2 py-0.5 md:col-span-1 md:col-start-2 md:row-start-1"
     >
-      <div className="hidden sm:flex">
-        <Select onValueChange={setCategory} value={category}>
-          <SelectTrigger className="w-fit border-0 outline-none">
+      <div className="flex items-center justify-center">
+        <Select
+          onValueChange={(val) => {
+            val = val === "all" ? "" : val;
+            setCategory(val);
+          }}
+          value={category}
+        >
+          <SelectTrigger className="w-fit border-0 text-xs outline-none sm:text-sm">
             <SelectValue placeholder="Alle Kategorien" />
           </SelectTrigger>
-          <SelectContent className="bg-primary-bg">
+          <SelectContent className="bg-primary-bg-3 text-primary-text-3">
             <SelectGroup>
               <SelectItem
                 key={`search-bar-category-all`}
@@ -75,20 +81,20 @@ function NavBarSearchBar() {
               </SelectItem>
               {Array.isArray(query.data) &&
                 query.data.map((cat) => (
-                <SelectItem
+                  <SelectItem
                     key={`search-bar-category-${cat.name.toLowerCase()}`}
                     value={cat.name}
-                  className="hover:cursor-pointer"
-                >
+                    className="hover:cursor-pointer"
+                  >
                     {cat.name}
-                </SelectItem>
-              ))}
+                  </SelectItem>
+                ))}
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
       <input
-        className="h-full w-full bg-primary-bg p-0 text-xs outline-none"
+        className="bg-primary-bg-1 h-full w-full p-0 px-1 text-xs outline-none md:text-sm"
         type="text"
         placeholder="Search.."
         value={searchText}
@@ -103,10 +109,10 @@ function NavBarSearchBar() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "linear" }}
             >
-              <SvgLoader svg="x" className="h-7 w-7 stroke-primary-text" />
+              <X className="stroke-accent-1 h-7 w-7" />
             </MotionButton>
           </TooltipTrigger>
-          <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
+          <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
             <p>Delete Entry</p>
           </TooltipContent>
         </Tooltip>
@@ -115,13 +121,10 @@ function NavBarSearchBar() {
       <Tooltip>
         <TooltipTrigger asChild className="w-fit">
           <MotionButton type="submit">
-            <SvgLoader
-              svg="search"
-              className="h-7 w-7 stroke-primary-text p-0.5"
-            />
+            <Search className="stroke-accent-1 h-7 w-7 p-0.5" />
           </MotionButton>
         </TooltipTrigger>
-        <TooltipContent className="rounded-lg bg-tooltip-bg p-1 text-xs text-tooltip-text">
+        <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
           <p>Search</p>
         </TooltipContent>
       </Tooltip>

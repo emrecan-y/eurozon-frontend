@@ -22,10 +22,15 @@
   transition: background-color 100ms ease-in;
 }
 
+* :focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-color: var(--accent-2);
+}
+
 .dark {
   --primary-1: rgb(3, 11, 52);
   --primary-text-1: #dcdcdd;
-  --accent-1: rgb(245, 225, 85);
+  --accent-1: rgb(255, 233, 64);
 
   --primary-2: rgb(37, 41, 63);
   --primary-text-2: rgb(196, 196, 196);

@@ -21,14 +21,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { QueryContext } from "../context/QueryContext";
+import { useUserQuery } from "../queries/useUserQuery";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
-  const { userQuery } = useContext(QueryContext);
+  const userQuery = useUserQuery();
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   useEffect(() => {
@@ -42,7 +42,7 @@ function Navbar() {
 
   return (
     <TooltipProvider>
-      <div className="text-accent-2 shadow-xs sticky top-0 z-20 h-fit w-screen">
+      <div className="text-accent-2 sticky top-0 z-20 h-fit w-screen shadow-md">
         <div className="bg-primary-bg-2 grid grid-cols-3 gap-1 p-1 md:p-3">
           <Tooltip>
             <TooltipTrigger asChild className="w-fit">
@@ -105,7 +105,7 @@ function Navbar() {
                         }}
                       >
                         Anmelden
-                        {userQuery?.data?.name + " " + userQuery?.data?.surname}
+                        {userQuery.data?.name + " " + userQuery?.data?.surname}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => {

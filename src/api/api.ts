@@ -1,6 +1,6 @@
 import { Category } from "@/models/category";
 import { Product, ProductQueryType } from "@/models/product";
-import { LoginUserSchema, RegisterUserSchema } from "@/models/user";
+import { LoginUserSchema, RegisterUserSchema, User } from "@/models/user";
 import { getCookie } from "@/util/util";
 import axios from "axios";
 
@@ -79,7 +79,7 @@ export async function getUser() {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
+      return null;
     });
 }
 
@@ -88,6 +88,6 @@ export async function getMainCategories() {
     .get<Category[]>("/categories/main")
     .then((response) => response.data)
     .catch((error) => {
-      console.log(error);
+      return null;
     });
 }

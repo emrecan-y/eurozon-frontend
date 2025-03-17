@@ -4,7 +4,6 @@ import MotionButton from "./components/ui/MotionButton";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CookiesProvider } from "react-cookie";
-import { QueryContextProvider } from "./components/context/QueryContext";
 import AppRoutes from "./AppRoutes";
 
 function App() {
@@ -15,11 +14,9 @@ function App() {
     <>
       <CookiesProvider>
         <QueryClientProvider client={queryClient}>
-          <QueryContextProvider>
-            <BrowserRouter>
-              <AppRoutes />
-            </BrowserRouter>
-          </QueryContextProvider>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
         </QueryClientProvider>
       </CookiesProvider>
 

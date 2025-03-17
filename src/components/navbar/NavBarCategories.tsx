@@ -1,9 +1,8 @@
+import { useMainCategoriesQuery } from "../queries/useMainCategoriesQuery";
 import NavBarCategoryButton from "./NavBarCategoryButton";
-import { QueryContext } from "../context/QueryContext";
-import { useContext } from "react";
 
 function NavBarCategories() {
-  const { mainCategoriesQuery } = useContext(QueryContext);
+  const mainCategoriesQuery = useMainCategoriesQuery();
   return (
     <>
       {mainCategoriesQuery &&

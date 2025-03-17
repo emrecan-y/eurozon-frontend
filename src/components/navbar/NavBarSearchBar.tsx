@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import MotionButton from "../ui/MotionButton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -11,14 +11,14 @@ import {
   SelectValue,
 } from "../ui/select";
 import { CheckIcon, Search, X } from "lucide-react";
-import { QueryContext } from "../context/QueryContext";
+import { useMainCategoriesQuery } from "../queries/useMainCategoriesQuery";
 
 function NavBarSearchBar() {
   const [category, setCategory] = useState("");
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
-  const { mainCategoriesQuery } = useContext(QueryContext);
+  const mainCategoriesQuery = useMainCategoriesQuery();
 
   function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -48,7 +48,7 @@ function NavBarSearchBar() {
   return (
     <form
       onSubmit={(e) => searchSubmit(e)}
-      className="bg-primary-bg-1 text-primary-text-1 border-primary-bg-1 col-span-2 flex w-full rounded-full border-2 px-2 py-0.5 md:col-span-1 md:col-start-2 md:row-start-1"
+      className="bg-primary-bg-1 text-primary-text-1 border-primary-bg-1 col-span-2 flex w-full rounded-full border-2 px-2 py-0.5 shadow-md md:col-span-1 md:col-start-2 md:row-start-1"
     >
       <div className="flex items-center justify-center">
         <Select

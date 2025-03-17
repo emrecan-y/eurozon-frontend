@@ -18,18 +18,20 @@ export const RegisterUserSchema = z
   .object({
     email: z
       .string()
-      .email("Invalid email address")
-      .min(1, "Email is required"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
+      .email("Ungültige E-Mail-Adresse")
+      .min(1, "E-Mail ist erforderlich"),
+    password: z
+      .string()
+      .min(8, "Das Passwort muss mindestens 8 Zeichen lang sein"),
     passwordConfirm: z
       .string()
-      .min(8, "Password must be at least 8 characters"),
-    surname: z.string().min(1, "Surname is required"),
-    name: z.string().min(1, "Name is required"),
+      .min(8, "Das Passwort muss mindestens 8 Zeichen lang sein"),
+    surname: z.string().min(1, "Nachname ist erforderlich"),
+    name: z.string().min(1, "Vorname ist erforderlich"),
     dateOfBirth: z
       .date()
       .refine((date) => date <= new Date(), {
-        message: "Date of birth cannot be in the future",
+        message: "Geburtsdatum kann nicht in der Zukunft liegen",
       })
       .refine(
         (date) => {
@@ -39,16 +41,19 @@ export const RegisterUserSchema = z
           );
           return date <= age18Date;
         },
-        { message: "User needs to be atleast 18 years old." },
+        { message: "Der Benutzer muss mindestens 18 Jahre alt sein." },
       ),
     address: AddressSchema,
   })
   .refine((data) => data.password === data.passwordConfirm, {
-    message: "Passwords must match",
+    message: "Passwörter müssen übereinstimmen",
     path: ["passwordConfirm"],
   });
 
 export const LoginUserSchema = z.object({
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
-  password: z.string().min(1, "Password is required"),
+  email: z
+    .string()
+    .email("Ungültige E-Mail-Adresse")
+    .min(1, "E-Mail ist erforderlich"),
+  password: z.string().min(1, "Passwort ist erforderlich"),
 });

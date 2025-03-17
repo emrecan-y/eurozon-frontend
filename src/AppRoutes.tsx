@@ -6,16 +6,16 @@ import ProductGrid from "./components/product/ProductGrid";
 import RegisterPage from "./components/RegisterPage";
 import Layout from "./components/layouts/Layout";
 import { useCookies } from "react-cookie";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { QueryContext } from "./components/context/QueryContext";
+import { useUserQuery } from "./components/queries/useUserQuery";
 
 function AppRoutes() {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { userQuery } = useContext(QueryContext);
+  const userQuery = useUserQuery();
 
   useEffect(() => {
     if (cookies.access_token) {

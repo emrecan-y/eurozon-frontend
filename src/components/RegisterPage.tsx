@@ -38,7 +38,7 @@ function RegisterPage() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-3 p-6 md:grid-cols-2"
+          className="grid w-full grid-cols-1 gap-3 p-6 md:grid-cols-2"
         >
           <div className="mb-2 flex flex-col items-center text-center md:col-span-2">
             <h1 className="text-xl font-bold">Welcome to eurozon!</h1>
@@ -50,7 +50,7 @@ function RegisterPage() {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="md:col-span-2 md:w-full">
+              <FormItem className="w-full md:col-span-2 md:w-full">
                 <FormLabel>Email</FormLabel>
                 <FormControl className="w-full">
                   <Input
@@ -69,13 +69,13 @@ function RegisterPage() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Passwort</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="password"
-                    placeholder="Password"
+                    placeholder="Passwort"
                     {...field}
                   />
                 </FormControl>
@@ -88,13 +88,13 @@ function RegisterPage() {
             control={form.control}
             name="passwordConfirm"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm password</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Passwort wiederholen</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="password"
-                    placeholder="Password"
+                    placeholder="Passwort"
                     {...field}
                   />
                 </FormControl>
@@ -107,11 +107,11 @@ function RegisterPage() {
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="text"
                     placeholder="Name"
                     {...field}
@@ -126,13 +126,13 @@ function RegisterPage() {
             control={form.control}
             name="surname"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Surname</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Nachname</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="text"
-                    placeholder="Surname"
+                    placeholder="Nachname"
                     {...field}
                   />
                 </FormControl>
@@ -145,13 +145,13 @@ function RegisterPage() {
             control={form.control}
             name="address.street"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Street</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Straße</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="text"
-                    placeholder="Street"
+                    placeholder="Straße"
                     {...field}
                   />
                 </FormControl>
@@ -164,13 +164,13 @@ function RegisterPage() {
             control={form.control}
             name="address.streetNumber"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Street Number</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Straßennummer</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="text"
-                    placeholder="Street Number"
+                    placeholder="Straßennummer"
                     {...field}
                   />
                 </FormControl>
@@ -183,13 +183,13 @@ function RegisterPage() {
             control={form.control}
             name="address.town"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Town</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Stadt</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="text"
-                    placeholder="Town"
+                    placeholder="Stadt"
                     {...field}
                   />
                 </FormControl>
@@ -202,13 +202,13 @@ function RegisterPage() {
             control={form.control}
             name="address.postalCode"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Postal Code</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Postleitzahl</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="text"
-                    placeholder="Postal Code"
+                    placeholder="Postleitzahl"
                     {...field}
                   />
                 </FormControl>
@@ -221,13 +221,13 @@ function RegisterPage() {
             control={form.control}
             name="address.country"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Country</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Land</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="text"
-                    placeholder="Country"
+                    placeholder="Land"
                     {...field}
                   />
                 </FormControl>
@@ -240,11 +240,11 @@ function RegisterPage() {
             control={form.control}
             name="dateOfBirth"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Date of Birth</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Geburtsdatum</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1"
+                    className="bg-primary-bg-1 text-primary-text-1 w-full"
                     type="date"
                     value={
                       field.value ? field.value.toISOString().split("T")[0] : ""
@@ -261,10 +261,10 @@ function RegisterPage() {
             className="bg-accent-2 text-primary-bg-2 w-full rounded-lg py-2 md:col-span-2"
             type="submit"
           >
-            Register
+            Registrieren
           </MotionButton>
           <div className="text-center text-sm md:col-span-2">
-            Already have an account?{" "}
+            Haben Sie bereits ein Account?{" "}
             <Link to="/login" className="underline underline-offset-4">
               Login
             </Link>

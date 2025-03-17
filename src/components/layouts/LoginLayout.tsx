@@ -11,7 +11,7 @@ function LoginLayout() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-primary-bg-1 text-primary-text-1 flex min-h-screen flex-col items-center justify-center">
+    <div className="bg-primary-bg-1 text-primary-text-1 flex min-h-screen flex-col items-center justify-center transition-colors duration-100">
       <div className="my-8 flex flex-1 flex-col items-center justify-center md:my-4">
         <TooltipProvider>
           <Tooltip>

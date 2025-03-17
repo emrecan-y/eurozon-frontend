@@ -65,7 +65,7 @@ function NavBarSearchBar() {
           <SelectTrigger className="w-fit border-0 text-xs outline-none sm:text-sm">
             <SelectValue placeholder="Alle Kategorien" />
           </SelectTrigger>
-          <SelectContent className="bg-primary-bg-3 text-primary-text-3">
+          <SelectContent className="bg-primary-bg-2 primary-bg-3 text-primary-text-2 border-2 shadow-lg">
             <SelectGroup>
               <SelectItem
                 key={`search-bar-category-all`}
@@ -94,7 +94,7 @@ function NavBarSearchBar() {
         </Select>
       </div>
       <input
-        className="bg-primary-bg-1 h-full w-full p-0 px-1 text-xs outline-none md:text-sm"
+        className="bg-primary-bg-1 h-full w-full p-0 px-1 text-xs outline-none focus:outline-none md:text-sm"
         type="text"
         placeholder="Search.."
         value={searchText}

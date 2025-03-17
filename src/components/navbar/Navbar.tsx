@@ -8,14 +8,24 @@ import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@radix-ui/react-tooltip";
+} from "../ui/tooltip";
 import NavBarCategories from "./NavBarCategories";
 import NavBarSearchBar from "./NavBarSearchBar";
 import { Menu, ShoppingCart, User, X } from "lucide-react";
+import { useCookies } from "react-cookie";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   useEffect(() => {
@@ -49,14 +59,61 @@ function Navbar() {
 
           <div className="col-span-1 col-start-3 flex w-full items-center justify-end gap-3 pr-2">
             <Tooltip>
-              <TooltipTrigger asChild className="w-fit">
-                <MotionButton onClick={() => navigate("/login")}>
-                  <User className="h-7 w-7" />
-                </MotionButton>
-              </TooltipTrigger>
-              <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
-                <p>User</p>
-              </TooltipContent>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <TooltipTrigger className="flex h-full w-full items-center justify-center">
+                    <MotionButton>
+                      <User className="h-7 w-7" />
+                    </MotionButton>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
+                    <p>User</p>
+                  </TooltipContent>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-primary-bg-2 text-primary-text-2 border-2 shadow-lg">
+                  {cookies.access_token ? (
+                    <>
+                      <DropdownMenuLabel className="border-b-[1px]">
+                        Joachim Admin
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => {
+                          navigate("/register");
+                        }}
+                      >
+                        Persönliche Daten
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>Adresse</DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="text-red-500"
+                        onClick={() => {
+                          removeCookie("access_token");
+                        }}
+                      >
+                        Abmelden
+                      </DropdownMenuItem>
+                    </>
+                  ) : (
+                    <>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          navigate("/login");
+                        }}
+                      >
+                        Anmelden
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          navigate("/register");
+                        }}
+                      >
+                        Registrieren
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </Tooltip>
 
             <Tooltip>

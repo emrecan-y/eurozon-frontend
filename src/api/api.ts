@@ -142,7 +142,7 @@ export async function updateShoppingCartPosition(
 }
 
 export async function addOrder() {
-  const response = await axios.post<Order>("/orders", {
+  const response = await axios.post<Order>("/orders", null ,{
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),
     },

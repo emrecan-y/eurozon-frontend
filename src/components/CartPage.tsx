@@ -32,14 +32,17 @@ export const CartPage = () => {
   }
 
   return (
-    <div className="my-8 flex h-full w-full flex-col items-center justify-center gap-6">
+    <div className=" flex flex-col h-full w-full items-center justify-center gap-6 my-12">
       {shoppingCartList.map((cartItem) => (
         <div
           key={cartItem.id}
-          className="flex h-2/5 w-4/5 flex-row items-center justify-center bg-primary-bg-2 p-4 shadow-xl"
+          className="flex flex-row w-3/5 h-64 items-center justify-center bg-primary-bg-2 p-4 shadow-xl"
         >
-          <Image className="h-4/5 w-2/5 text-primary-text-2" />
-          <div className="flex h-full w-full flex-col items-center justify-center gap-3 rounded-lg p-2 px-6 align-middle">
+          <img
+            src={cartItem.product.scrUrl}
+            className=" text-primary-text-2 h-4/5 pl-12"
+          />
+          <div className="flex w-full flex-col items-center justify-center gap-3 rounded-lg p-2 px-6 align-middle">
             <p className="font-bold">{cartItem.product.name}</p>
             <p>{cartItem.product.description}</p>
             <p className="font-bold">{cartItem.amount}</p>

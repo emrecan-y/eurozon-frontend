@@ -8,6 +8,7 @@ export type Product = {
   price: string;
   stock: number;
   category: Category;
+  scrUrl : string;
 };
 
 export type ProductQueryType = {

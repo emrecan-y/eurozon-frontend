@@ -29,6 +29,7 @@ export const useAddOrders = () => {
         mutationFn: addOrder,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["orderList"] });
+            queryClient.invalidateQueries({ queryKey: ["shoppingCart"] });
         },
     });
     return mutation;

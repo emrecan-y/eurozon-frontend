@@ -1,5 +1,9 @@
 import { Category } from "@/models/category";
-import { Product, ProductQueryType } from "@/models/product";
+import {
+  PaginatedProductList,
+  Product,
+  ProductQueryType,
+} from "@/models/product";
 import { ShoppingCartPosition } from "@/models/shoppingcartPosition";
 import { LoginUserSchema, RegisterUserSchema, User } from "@/models/user";
 import { getCookie } from "@/util/util";
@@ -11,28 +15,16 @@ import { Order } from "@/models/order";
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 export async function getProducts(query?: ProductQueryType) {
-  const params = new URLSearchParams();
-  if (query) {
-    if (query.page) {
-      params.append("page", query.page.toString());
-    }
-    if (query.category) {
-      params.append("category", query.category);
-    }
-    if (query.size) {
-      params.append("size", query.size.toString());
-    }
-    if (query.searchString) {
-      params.append("searchString", query.searchString);
-    }
-  }
-  let destination = "/products";
-  if (params.size > 0) {
-    destination += "?" + params.toString();
-  }
   return axios
-    .get<Product[]>(destination)
-    .then((response) => response.data.products)
+    .get<PaginatedProductList>("/products", {
+      params: {
+        page: query?.page,
+        category: query?.category,
+        size: query?.size,
+        searchString: query?.searchString,
+      },
+    })
+    .then((response) => response.data)
     .catch((error) => {
       console.log(error);
     });
@@ -133,7 +125,7 @@ export async function updateShoppingCartPosition(
   dto: updateShoppingCartPositionDto,
 ) {
   const response = await axios.put<ShoppingCartPosition>("/cart", null, {
-    params : dto,
+    params: dto,
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),
     },
@@ -142,7 +134,7 @@ export async function updateShoppingCartPosition(
 }
 
 export async function addOrder() {
-  const response = await axios.post<Order>("/orders", null ,{
+  const response = await axios.post<Order>("/orders", null, {
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),
     },
@@ -150,9 +142,7 @@ export async function addOrder() {
   return response.data;
 }
 
-export const getOrders = async (): Promise<
-  Order[]
-> => {
+export const getOrders = async (): Promise<Order[]> => {
   const response = await axios.get<Order[]>("/orders", {
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),

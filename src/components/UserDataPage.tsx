@@ -16,85 +16,27 @@ export const UserDataPage = () => {
   }
 
   return (
-    <div className="user-container">
-      <h2>User Informationen</h2>
-      <div className="user-details">
-        <p>
-          <strong>Name:</strong> {data.name} {data.surname}
-        </p>
-        <p>
-          <strong>E-Mail:</strong> {data.email}
-        </p>
-        <p>
-          <strong>Rolle:</strong> {data.role}
-        </p>
-        <p>
-          <strong>Geburtsdatum:</strong>{" "}
-          {new Date(data.dateOfBirth).toLocaleDateString()}
-        </p>
-        <p>
-          <strong>Erstellt am:</strong>{" "}
-          {new Date(data.dateOfCreation).toLocaleDateString()}
-        </p>
-       
-          <div className="address-section">
-            <strong>Adresse:</strong>
-            <p>
-              {data.address.street} {data.address.streetNumber}
-            </p>
-            <p>
-              {data.address.postalCode} {data.address.town}
-            </p>
-            <p>{data.address.country}</p>
-          </div>
-      </div>
+    <div className="flex flex-col justify-center items-center self-center w-1/2 p-6 gap-2 rounded-2xl shadow-xl mt-8 bg-primary-bg-2 ">
+      <h1 className="font-bold text-xl">User Informationen</h1>
+      <div className="grid grid-cols-2 gap-4 mt-7">
+          <p className="font-semibold">E-Mail:</p> <p>{data.email}</p>
+          <p className="font-semibold">Name:</p>
+          <p>
+            {data.surname} {data.name}
+          </p>
+          <p className="font-semibold">Geburtstag:</p> <p>{new Date(data.dateOfBirth).toLocaleDateString()}</p>
+          <p className="font-semibold mt-6">Adresse</p>
+          <p></p>
+          <p className="font-semibold">City:</p>{" "}
+          <p>{data.address.town}</p>
+          <p className="font-semibold">Zip Code:</p>{" "}
+          <p>{data.address.postalCode}</p>
+          <p className="font-semibold">Street:</p>{" "}
+          <p>{data.address.street}</p>
+          <p className="font-semibold">Street-Nr:</p>{" "}
+          <p>{data.address.streetNumber}</p>
+        </div>
+        <button className="bg-blue-600 p-2 rounded-md mt-4">Adresse ändern</button>
     </div>
   );
 };
-
-// CSS bleibt gleich
-const styles = `
-  .user-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-
-  h2 {
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-
-  .user-details {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  p {
-    margin: 5px 0;
-    color: #666;
-  }
-
-  strong {
-    color: #333;
-    margin-right: 5px;
-  }
-
-  .address-section {
-    margin-top: 10px;
-    padding-left: 20px;
-  }
-
-  .loading, .error, .no-data {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-  }
-
-  .error {
-    color: #d32f2f;
-  }
-`;

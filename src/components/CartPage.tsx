@@ -24,9 +24,10 @@ export const CartPage = () => {
     const sum = shoppingCartList
       ?.map((e) => Number.parseFloat(e.product.price))
       .reduce((a, b) => a + b);
-    setAmount(shoppingCartList?.length)
+
     if (sum) {
       setTotal(sum);
+      setAmount(shoppingCartList?.length)
     }
     // setTotal(sum);
     // shoppingCartList?.forEach((element) => {

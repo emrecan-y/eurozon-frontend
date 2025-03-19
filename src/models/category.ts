@@ -6,11 +6,3 @@ export type Category = {
   description: string;
   parent: Category | undefined;
 };
-
-export const mainCategories = [
-  "Technik",
-  "Kleidung",
-  "Lebensmittel",
-  "Sport",
-  "Haus & Garten",
-];

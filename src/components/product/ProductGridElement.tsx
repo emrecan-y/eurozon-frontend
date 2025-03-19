@@ -1,14 +1,12 @@
 import { Product } from "@/models/product";
-import { ShoppingCartPosition } from "@/models/shoppingcartPosition";
-import { Image } from "lucide-react";
 import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
 import { UUID } from "crypto";
 
-type ProductGridViewProps = {
+type ProductGridElement = {
   product?: Product;
 };
 
-function ProductGridView({ product }: ProductGridViewProps) {
+function ProductGridElement({ product }: ProductGridElement) {
   const addMutation = useAddShoppingCartPosition();
 
   const handleBuyButton = (productId: UUID, amount: number) => {
@@ -41,4 +39,4 @@ function ProductGridView({ product }: ProductGridViewProps) {
   }
 }
 
-export default ProductGridView;
+export default ProductGridElement;

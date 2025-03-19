@@ -1,5 +1,5 @@
 import { mainCategories } from "@/models/category";
-import ProductGridView from "./ProductGridView";
+import ProductGridElement from "./ProductGridElement";
 import { getProducts } from "@/api/api";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -48,12 +48,12 @@ function ProductGrid() {
         </div>
         {!Array.isArray(productList)
           ? emptyArr.map((e, index) => (
-              <ProductGridView
+              <ProductGridElement
                 key={`product-skeleton-${index}`}
-              ></ProductGridView>
+              ></ProductGridElement>
             ))
           : productList.map((p) => (
-              <ProductGridView product={p} key={p.id}></ProductGridView>
+              <ProductGridElement product={p} key={p.id}></ProductGridElement>
             ))}
       </div>
     </>

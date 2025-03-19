@@ -8,12 +8,19 @@ export type Product = {
   price: string;
   stock: number;
   category: Category;
-  imageUrl : string;
+  imageUrl: string;
 };
 
 export type ProductQueryType = {
-  page?: number;
-  size?: number;
-  category?: string;
-  searchString?: string;
+  page: number;
+  size: number;
+  category: string;
+  searchString: string;
+};
+
+export type PaginatedProductList = {
+  products: Product[];
+  pageSize: number;
+  currentPageNumber: number;
+  maxPageNumber: number;
 };

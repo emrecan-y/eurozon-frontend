@@ -4,7 +4,7 @@ import LoginLayout from "./components/layouts/LoginLayout";
 import LoginPage from "./components/LoginPage";
 import ProductGrid from "./components/product/ProductGrid";
 import RegisterPage from "./components/RegisterPage";
-import Layout from "./components/layouts/Layout";
+import ShopLayout from "./components/layouts/ShopLayout";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -34,7 +34,7 @@ function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<ShopLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/products" element={<ProductGrid />} />
           <Route path="/cart" element={<CartPage />} />

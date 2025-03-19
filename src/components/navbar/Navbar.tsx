@@ -121,7 +121,7 @@ function Navbar() {
 
             <Tooltip>
               <TooltipTrigger asChild className="w-fit">
-                <MotionButton>
+                <MotionButton onClick={() => navigate("/cart")}>
                   <ShoppingCart className="h-7 w-7" />
                 </MotionButton>
               </TooltipTrigger>

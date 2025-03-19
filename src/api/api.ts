@@ -1,8 +1,11 @@
 import { Category } from "@/models/category";
 import { Product, ProductQueryType } from "@/models/product";
+import { ShoppingCartPosition } from "@/models/shoppingcartPosition";
 import { LoginUserSchema, RegisterUserSchema, User } from "@/models/user";
 import { getCookie } from "@/util/util";
 import axios from "axios";
+import { UUID } from "crypto";
+import { updateShoppingCartPositionDto } from "./dtos/updateShoppingCartPositionDto";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -90,4 +93,48 @@ export async function getMainCategories() {
     .catch((error) => {
       return null;
     });
+}
+
+export const getShoppingCartPositions = async (): Promise<
+  ShoppingCartPosition[]
+> => {
+  const response = await axios.get<ShoppingCartPosition[]>("/cart/get", {
+    headers: {
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+  });
+  return response.data;
+};
+
+export async function addShoppingCartPosition(
+  dto: updateShoppingCartPositionDto,
+) {
+  const response = await axios.post<ShoppingCartPosition>("/cart/add", null, {
+    params: dto,
+    headers: {
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+  });
+  return response.data;
+}
+
+export async function removeShoppingCartPosition(productId: UUID) {
+  const response = await axios.delete("/cart/remove", {
+    params: { productId },
+    headers: {
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+  });
+  return response.data;
+}
+
+export async function updateShoppingCartPosition(
+  dto: updateShoppingCartPositionDto,
+) {
+  const response = await axios.put<ShoppingCartPosition>("/cart/update", dto, {
+    headers: {
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+  });
+  return response.data;
 }

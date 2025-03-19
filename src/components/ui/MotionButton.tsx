@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
   AnimationControls,
   motion,
@@ -18,6 +19,7 @@ type MotionButtonProps = {
   animate?: boolean | VariantLabels | TargetAndTransition | AnimationControls;
   transition?: Transition;
   disableAnimation?: boolean;
+  disableButton?: boolean;
   layout?: boolean | "position" | "size" | "preserve-aspect";
   whileHover?: VariantLabels | TargetAndTransition;
   whileTap?: VariantLabels | TargetAndTransition;
@@ -36,6 +38,7 @@ const MotionButton = forwardRef<HTMLButtonElement, MotionButtonProps>(
       animate,
       transition,
       disableAnimation,
+      disableButton,
       layout,
       whileHover = {
         scale: 1.08,
@@ -49,8 +52,14 @@ const MotionButton = forwardRef<HTMLButtonElement, MotionButtonProps>(
     }: MotionButtonProps,
     ref,
   ) => {
-    className += " hover:cursor-pointer";
-    if (disableAnimation) {
+    if (disableButton) {
+      className = cn("hover:cursor-default text-primary-bg-3", className);
+      return (
+        <button ref={ref} id={id} className={className} type={type} {...props}>
+          {children}
+        </button>
+      );
+    } else if (disableAnimation) {
       return (
         <button
           ref={ref}

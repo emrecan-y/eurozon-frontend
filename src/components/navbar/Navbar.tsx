@@ -82,7 +82,7 @@ function Navbar() {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={() => {
-                          navigate("/register");
+                          navigate("/userdata");
                         }}
                       >
                         Persönliche Daten

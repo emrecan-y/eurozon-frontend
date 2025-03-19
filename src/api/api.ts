@@ -31,7 +31,7 @@ export async function getProducts(query?: ProductQueryType) {
   }
   return axios
     .get<Product[]>(destination)
-    .then((response) => response.data)
+    .then((response) => response.data.products)
     .catch((error) => {
       console.log(error);
     });

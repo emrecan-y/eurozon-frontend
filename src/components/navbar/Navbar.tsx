@@ -42,20 +42,20 @@ function Navbar() {
 
   return (
     <TooltipProvider>
-      <div className="text-accent-2 sticky top-0 z-20 h-fit w-screen shadow-md">
-        <div className="bg-primary-bg-2 grid grid-cols-3 gap-1 p-1 md:p-3">
+      <div className="sticky top-0 z-20 h-fit w-screen text-accent-2 shadow-md">
+        <div className="grid grid-cols-3 gap-1 bg-primary-bg-2 p-1 md:p-3">
           <Tooltip>
             <TooltipTrigger asChild className="w-fit">
               <MotionButton
                 onClick={() => navigate("/")}
-                className="text-primary-text-1 w-fit pl-2 text-3xl"
+                className="w-fit pl-2 text-3xl text-primary-text-1"
                 whileHover={{}}
               >
                 eurozon
                 <span className="text-accent-2">.de</span>
               </MotionButton>
             </TooltipTrigger>
-            <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
+            <TooltipContent className="rounded-lg bg-primary-bg-3 p-1 text-xs text-primary-text-3">
               <p>Homepage</p>
             </TooltipContent>
           </Tooltip>
@@ -69,11 +69,11 @@ function Navbar() {
                       <User className="h-7 w-7" />
                     </MotionButton>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
+                  <TooltipContent className="rounded-lg bg-primary-bg-3 p-1 text-xs text-primary-text-3">
                     <p>User</p>
                   </TooltipContent>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-primary-bg-2 text-primary-text-2 border-2 shadow-lg">
+                <DropdownMenuContent className="border-2 bg-primary-bg-2 text-primary-text-2 shadow-lg">
                   {cookies.access_token ? (
                     <>
                       <DropdownMenuLabel className="border-b-[1px]">
@@ -87,7 +87,13 @@ function Navbar() {
                       >
                         Persönliche Daten
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Adresse</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          navigate("/orders");
+                        }}
+                      >
+                        Rechnungen
+                      </DropdownMenuItem>
                       <DropdownMenuItem
                         className="text-red-500"
                         onClick={() => {
@@ -125,7 +131,7 @@ function Navbar() {
                   <ShoppingCart className="h-7 w-7" />
                 </MotionButton>
               </TooltipTrigger>
-              <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
+              <TooltipContent className="rounded-lg bg-primary-bg-3 p-1 text-xs text-primary-text-3">
                 <p>Shoppingcart</p>
               </TooltipContent>
             </Tooltip>
@@ -160,13 +166,13 @@ function Navbar() {
                       )}
                     </MotionButton>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
+                  <TooltipContent className="rounded-lg bg-primary-bg-3 p-1 text-xs text-primary-text-3">
                     <p>{showMenu ? "Close" : "Categories"} </p>
                   </TooltipContent>
                 </Tooltip>
               </AnimatePresence>
             </div>
-            <p className="text-primary-text-1 text-xs">Categories</p>
+            <p className="text-xs text-primary-text-1">Categories</p>
           </div>
           <NavBarSearchBar />
         </div>
@@ -175,7 +181,7 @@ function Navbar() {
             {showMenu && (
               <motion.div
                 key={`burger-menu-${showMenu}`}
-                className="bg-primary-bg-2 text-primary-text-2 absolute flex w-full flex-col items-start gap-1 p-2"
+                className="absolute flex w-full flex-col items-start gap-1 bg-primary-bg-2 p-2 text-primary-text-2"
                 initial={{ opacity: 0, top: "-100px" }}
                 exit={{ opacity: 0, top: "-100px" }}
                 animate={{ opacity: 1, top: "0" }}

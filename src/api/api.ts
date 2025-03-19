@@ -6,6 +6,7 @@ import { getCookie } from "@/util/util";
 import axios from "axios";
 import { UUID } from "crypto";
 import { updateShoppingCartPositionDto } from "./dtos/updateShoppingCartPositionDto";
+import { Order } from "@/models/order";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -98,7 +99,7 @@ export async function getMainCategories() {
 export const getShoppingCartPositions = async (): Promise<
   ShoppingCartPosition[]
 > => {
-  const response = await axios.get<ShoppingCartPosition[]>("/cart/get", {
+  const response = await axios.get<ShoppingCartPosition[]>("/cart", {
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),
     },
@@ -109,7 +110,7 @@ export const getShoppingCartPositions = async (): Promise<
 export async function addShoppingCartPosition(
   dto: updateShoppingCartPositionDto,
 ) {
-  const response = await axios.post<ShoppingCartPosition>("/cart/add", null, {
+  const response = await axios.post<ShoppingCartPosition>("/cart", null, {
     params: dto,
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),
@@ -119,7 +120,7 @@ export async function addShoppingCartPosition(
 }
 
 export async function removeShoppingCartPosition(productId: UUID) {
-  const response = await axios.delete("/cart/remove", {
+  const response = await axios.delete("/cart", {
     params: { productId },
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),
@@ -131,10 +132,31 @@ export async function removeShoppingCartPosition(productId: UUID) {
 export async function updateShoppingCartPosition(
   dto: updateShoppingCartPositionDto,
 ) {
-  const response = await axios.put<ShoppingCartPosition>("/cart/update", dto, {
+  const response = await axios.put<ShoppingCartPosition>("/cart", null, {
+    params : dto,
     headers: {
       Authorization: "Bearer " + getCookie("access_token"),
     },
   });
   return response.data;
 }
+
+export async function addOrder() {
+  const response = await axios.post<Order>("/orders", {
+    headers: {
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+  });
+  return response.data;
+}
+
+export const getOrders = async (): Promise<
+  Order[]
+> => {
+  const response = await axios.get<Order[]>("/orders", {
+    headers: {
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+  });
+  return response.data;
+};

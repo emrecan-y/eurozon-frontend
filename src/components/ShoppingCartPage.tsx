@@ -43,7 +43,9 @@ function ShoppingCartPage() {
   };
 
   const handleAmountChange = (newAmount: number, currentProductId: UUID) => {
-    if (newAmount >= 1) {
+    if (newAmount >= 9) {
+      updateMutation.mutate({ amount: 9, productId: currentProductId });
+    } else if (newAmount >= 1) {
       updateMutation.mutate({ amount: newAmount, productId: currentProductId });
     }
   };
@@ -66,9 +68,9 @@ function ShoppingCartPage() {
           >
             <img
               src={cartItem.product.imageUrl}
-              className="h-1/2 lg:h-4/5 px-2 lg:pl-12 text-primary-text-2 "
+              className="h-1/2 px-2 text-primary-text-2 lg:h-4/5 lg:pl-12"
             />
-            <div className="flex w-full flex-col text-center items-center justify-center gap-1 rounded-lg p-2 px-6 text-sm lg:gap-3 lg:text-base">
+            <div className="flex w-full flex-col items-center justify-center gap-1 rounded-lg p-2 px-6 text-center text-sm lg:gap-3 lg:text-base">
               <p className="font-bold">{cartItem.product.name}</p>
               <p>{cartItem.product.description}</p>
               <p className="font-bold">{cartItem.product.price}€</p>
@@ -104,7 +106,7 @@ function ShoppingCartPage() {
                 </button>
               </div>
               <button
-                className="rounded-md text-gray-100 bg-red-700 px-2 py-1  lg:text-base lg:p-2 transition-all hover:bg-red-600 hover:cursor-pointer"
+                className="rounded-md bg-red-700 px-2 py-1 text-gray-100 transition-all hover:cursor-pointer hover:bg-red-600 lg:p-2 lg:text-base"
                 onClick={() => handleRemoveButton(cartItem.product.id)}
               >
                 Item Entfernen
@@ -116,7 +118,7 @@ function ShoppingCartPage() {
         <p className="font-bold">Gesamtpreis: {total.toFixed(2)} €</p>
         <p className="font-semibold">Artikelanzahl: {productCount}</p>
         <button
-          className="rounded-md bg-green-700 text-gray-100 p-2 transition-all hover:bg-green-600 hover:cursor-pointer disabled:opacity-50"
+          className="rounded-md bg-green-700 p-2 text-gray-100 transition-all hover:cursor-pointer hover:bg-green-600 disabled:opacity-50"
           onClick={handleBuyButton}
           disabled={shoppingCartList.length <= 0 ? true : false}
         >

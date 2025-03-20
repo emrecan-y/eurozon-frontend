@@ -50,7 +50,7 @@ function ProductGrid() {
 
   return (
     <>
-      <div className="grid w-full grid-cols-1 gap-2 p-5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid w-full grid-cols-1 gap-4 p-5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div className="col-span-full">
           <p>
             {searchString && category

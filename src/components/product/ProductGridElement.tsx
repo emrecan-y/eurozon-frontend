@@ -22,7 +22,7 @@ function ProductGridElement({ product }: ProductGridElement) {
         <div className="flex w-full items-center justify-center bg-primary-bg-2">
           <img
             src={product.imageUrl}
-            className={`h-5/6 w-5/6 text-primary-text-2 ${!imageLoaded && "hidden"}`}
+            className={`h-5/6  text-primary-text-2 ${!imageLoaded && "hidden"}`}
             onLoad={() => {
               setImageLoaded(true);
             }}

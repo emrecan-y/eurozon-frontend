@@ -1,6 +1,5 @@
 import { getProducts, getTopProducts } from "@/api/api";
 import { Product } from "@/models/product";
-import { ProductCard } from "@/components/ui/ProductCard";
 import { useEffect, useState } from "react";
 import {
   Carousel,
@@ -9,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import HomePageProductCard from "./HomePageProductCard";
 
 function HomePage() {
   const [topList, setTopList] = useState<Product[]>();
@@ -34,7 +34,7 @@ function HomePage() {
       setSportList(e?.products);
     });
     getProducts({
-      category: "",
+      category: "lebensmittel",
       searchString: "",
       size: 12,
       page: 1,
@@ -46,22 +46,31 @@ function HomePage() {
     });
   }, []);
 
-
-  const ProductCarousel = ({ products, title }: { products?: Product[]; title: string }) => (
+  const ProductCarousel = ({
+    products,
+    title,
+  }: {
+    products?: Product[];
+    title: string;
+  }) => (
     <div className="w-72 lg:w-full lg:max-w-7xl lg:py-2">
-      <h2 className="mb-4 text-lg lg:text-2xl font-bold">{title}</h2>
+      <h2 className="mb-4 text-lg font-bold lg:text-2xl">{title}</h2>
       {products && products.length > 0 ? (
-        <Carousel 
-        opts={{
-          align: "start",
-          loop: true,
-          dragFree: true,
-        }}
-        className="w-full">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+            dragFree: true,
+          }}
+          className="w-full"
+        >
           <CarouselContent>
             {products.map((product) => (
-              <CarouselItem key={product.id} className="basis-2/4 md:basis-2/5 lg:basis-1/5">
-                <ProductCard product={product} />
+              <CarouselItem
+                key={product.id}
+                className="basis-2/4 md:basis-2/5 lg:basis-1/5"
+              >
+                <HomePageProductCard product={product} />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -76,7 +85,7 @@ function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <ProductCarousel products={topList} title="Top Produkte" />
+      <ProductCarousel products={topList} title="Unsere Topseller" />
       <ProductCarousel products={technikList} title="Technik" />
       <ProductCarousel products={sportList} title="Sport" />
       <ProductCarousel products={lebensmittelList} title="Lebensmittel" />

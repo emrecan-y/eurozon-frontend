@@ -1,5 +1,4 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import HomePage from "./components/HomePage";
 import LoginLayout from "./components/layouts/LoginLayout";
 import LoginPage from "./components/LoginPage";
 import ProductGrid from "./components/product/ProductGrid";
@@ -12,6 +11,7 @@ import { useUserQuery } from "./components/queries/useUserQuery";
 import { UserDataPage } from "./components/UserDataPage";
 import ShoppingCartPage from "./components/ShoppingCartPage";
 import OrderHistory from "./components/orderHistory/OrderHistory";
+import HomePage from "./components/homepage/HomePage";
 
 function AppRoutes() {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);

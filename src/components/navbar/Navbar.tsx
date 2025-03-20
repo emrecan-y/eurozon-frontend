@@ -11,7 +11,7 @@ import {
 } from "../ui/tooltip";
 import NavBarCategories from "./NavBarCategories";
 import NavBarSearchBar from "./NavBarSearchBar";
-import { Menu, ShoppingCart, User, X } from "lucide-react";
+import { Menu, Moon, ShoppingCart, Sun, User, X } from "lucide-react";
 import { useCookies } from "react-cookie";
 import {
   DropdownMenu,
@@ -23,6 +23,7 @@ import {
 } from "../ui/dropdown-menu";
 import { useUserQuery } from "../queries/useUserQuery";
 import { useGetShoppingCartPositions } from "../queries/useShoppingCartQuerys";
+import useDarkMode from "../hooks/useDarkMode";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -31,6 +32,7 @@ function Navbar() {
   const shoppingCartPositionsQuery = useGetShoppingCartPositions();
 
   const userQuery = useUserQuery();
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   useEffect(() => {
@@ -63,6 +65,20 @@ function Navbar() {
           </Tooltip>
 
           <div className="col-span-1 col-start-3 flex w-full items-center justify-end gap-3 pr-2">
+            <Tooltip>
+              <TooltipTrigger asChild className="w-fit">
+                <MotionButton onClick={toggleDarkMode}>
+                  {darkMode ? <Sun /> : <Moon />}
+                </MotionButton>
+              </TooltipTrigger>
+              <TooltipContent className="rounded-lg bg-primary-bg-3 p-1 text-xs text-primary-text-3">
+                <p>
+                  {darkMode
+                    ? "zu hellem Desing wechseln"
+                    : "zu dunklem Desing wechseln"}
+                </p>
+              </TooltipContent>
+            </Tooltip>
             <Tooltip>
               <DropdownMenu>
                 <DropdownMenuTrigger>

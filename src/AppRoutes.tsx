@@ -10,8 +10,8 @@ import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUserQuery } from "./components/queries/useUserQuery";
 import { UserDataPage } from "./components/UserDataPage";
-import { OrdersPage } from "./components/OrdersPage";
 import ShoppingCartPage from "./components/ShoppingCartPage";
+import OrderHistory from "./components/orderHistory/OrderHistory";
 
 function AppRoutes() {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
@@ -26,7 +26,6 @@ function AppRoutes() {
       userQuery?.refetch();
       navigate("/");
     } else {
-      console.log("removed");
       queryClient.resetQueries(["user"]);
     }
   }, [cookies]);
@@ -39,7 +38,7 @@ function AppRoutes() {
           <Route path="/products" element={<ProductGrid />} />
           <Route path="/shopping-cart" element={<ShoppingCartPage />} />
           <Route path="/user/data" element={<UserDataPage />} />
-          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/orders" element={<OrderHistory />} />
         </Route>
         <Route path="/" element={<LoginLayout />}>
           <Route path="/login" element={<LoginPage />} />

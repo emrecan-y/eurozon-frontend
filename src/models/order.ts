@@ -1,6 +1,17 @@
+import { UUID } from "crypto";
+import { Product } from "./product";
+
 export type Order = {
   orderNumber: number;
-  purchasedOn: Date;
+  purchasedOn: string;
   status: string;
-  totalPrice: number;
+  totalPrice: string;
+  orderPositions: OrderPosition[];
+};
+
+export type OrderPosition = {
+  id: UUID;
+  amount: number;
+  productPriceOnPurchase: string;
+  product: Product;
 };

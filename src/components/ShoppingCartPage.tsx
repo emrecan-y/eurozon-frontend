@@ -3,11 +3,10 @@ import {
   useGetShoppingCartPositions,
   useRemoveShoppingCartPosition,
 } from "./queries/useShoppingCartQuerys";
-import { Image } from "lucide-react";
 import { useAddOrders } from "./queries/useOrdersQuery";
 import { useEffect, useState } from "react";
 
-export const CartPage = () => {
+function ShoppingCartPage() {
   const {
     data: shoppingCartList,
     isLoading,
@@ -17,23 +16,20 @@ export const CartPage = () => {
   const removeMutation = useRemoveShoppingCartPosition();
   const orderMutation = useAddOrders();
   const [total, setTotal] = useState<number>(0);
-  const [amount, setAmount] = useState<number>(0);
 
   useEffect(() => {
-    setTotal(0);
-    const sum = shoppingCartList
-      ?.map((e) => Number.parseFloat(e.product.price))
-      .reduce((a, b) => a + b);
-
-    if (sum) {
+    if (Array.isArray(shoppingCartList) && shoppingCartList.length > 0) {
+      const sum = shoppingCartList
+        .map((e) => Number.parseFloat(e.product.price))
+        .reduce((a, b) => a + b);
       setTotal(sum);
-      setAmount(shoppingCartList?.length)
     }
-    // setTotal(sum);
-    // shoppingCartList?.forEach((element) => {
-    //   setTotal(total + element.amount * Number.parseInt(element.product.price));
-    // });
   }, [shoppingCartList]);
+
+  const productCount =
+    Array.isArray(shoppingCartList) && shoppingCartList.length > 0
+      ? shoppingCartList.map((item) => item.amount).reduce((a, b) => a + b)
+      : 0;
 
   const handleRemoveButton = (cartId: UUID) => {
     removeMutation.mutate(cartId);
@@ -58,7 +54,7 @@ export const CartPage = () => {
           className="flex h-64 w-3/5 flex-row items-center justify-center rounded-2xl bg-primary-bg-2 p-4 shadow-xl"
         >
           <img
-            src={cartItem.product.scrUrl}
+            src={cartItem.product.imageUrl}
             className="h-4/5 pl-12 text-primary-text-2"
           />
           <div className="flex w-full flex-col items-center justify-center gap-3 rounded-lg p-2 px-6 align-middle">
@@ -75,9 +71,9 @@ export const CartPage = () => {
           </div>
         </div>
       ))}
-      <div className="flex flex-col justify-center items-center gap-4 rounded-2xl border bg-white shadow-lg p-12">
+      <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border bg-white p-12 shadow-lg">
         <p className="font-bold">Gesamtpreis: {total} €</p>
-        <p className="font-semibold">Artikelanzahl: {amount}</p>
+        <p className="font-semibold">Artikelanzahl: {productCount}</p>
         <button
           className="rounded-md bg-green-700 p-2 transition-all hover:bg-green-600"
           onClick={handleBuyButton}
@@ -87,4 +83,5 @@ export const CartPage = () => {
       </div>
     </div>
   );
-};
+}
+export default ShoppingCartPage;

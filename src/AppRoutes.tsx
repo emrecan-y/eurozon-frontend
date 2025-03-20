@@ -9,9 +9,9 @@ import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUserQuery } from "./components/queries/useUserQuery";
-import { CartPage } from "./components/CartPage";
 import { UserDataPage } from "./components/UserDataPage";
 import { OrdersPage } from "./components/OrdersPage";
+import ShoppingCartPage from "./components/ShoppingCartPage";
 
 function AppRoutes() {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
@@ -37,8 +37,8 @@ function AppRoutes() {
         <Route path="/" element={<ShopLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/products" element={<ProductGrid />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/userdata" element={<UserDataPage />} />
+          <Route path="/shopping-cart" element={<ShoppingCartPage />} />
+          <Route path="/user/data" element={<UserDataPage />} />
           <Route path="/orders" element={<OrdersPage />} />
         </Route>
         <Route path="/" element={<LoginLayout />}>

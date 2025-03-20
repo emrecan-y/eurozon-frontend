@@ -94,7 +94,7 @@ function Navbar() {
                           navigate("/orders");
                         }}
                       >
-                        Rechnungen
+                        Bestellhistorie
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="text-red-500"
@@ -191,7 +191,7 @@ function Navbar() {
             {showMenu && (
               <motion.div
                 key={`burger-menu-${showMenu}`}
-                className="absolute flex w-full flex-col items-start gap-1 bg-primary-bg-2 p-2 text-primary-text-2"
+                className="absolute flex w-full flex-col items-start gap-1 border-b-2 border-primary-bg-3 bg-primary-bg-2 p-2 text-primary-text-2 shadow-xl"
                 initial={{ opacity: 0, top: "-100px" }}
                 exit={{ opacity: 0, top: "-100px" }}
                 animate={{ opacity: 1, top: "0" }}

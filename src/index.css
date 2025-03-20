@@ -21,6 +21,10 @@
   outline-color: var(--accent-2);
 }
 
+body {
+  background-color: var(--primary-1);
+}
+
 .dark {
   --primary-1: rgb(3, 11, 52);
   --primary-text-1: #dcdcdd;

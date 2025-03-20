@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MotionButton from "../ui/MotionButton";
 import { useEffect, useState } from "react";
 import { Category } from "@/models/category";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 type NavBarCategoryButtonProps = {
@@ -96,9 +96,9 @@ function NavBarCategoryButton({ category }: NavBarCategoryButtonProps) {
                 transition={{ type: "linear" }}
               >
                 {showChildren ? (
-                  <ChevronUp className="h-full w-full" />
-                ) : (
                   <ChevronDown className="h-full w-full" />
+                ) : (
+                  <ChevronRight className="h-full w-full" />
                 )}
               </MotionButton>
             )}

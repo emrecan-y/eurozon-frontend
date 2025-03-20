@@ -1,6 +1,6 @@
 import { ProductQueryType } from "@/models/product";
 import MotionButton from "../ui/MotionButton";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 type ProductGridPaginationProps = {
@@ -32,14 +32,15 @@ function ProductGridPagination({
   }
 
   return (
-    <div className="flex w-full items-center justify-center gap-2 p-4 text-xl">
+    <div className="grid w-fit grid-cols-7 items-center self-center p-4 text-xl">
       <MotionButton
         disableButton={isFirstPage}
         onClick={() => {
           changePage(currentPageNumber - 1);
         }}
+        className="col-start-1 text-center"
       >
-        <ArrowLeft />
+        <ChevronLeft />
       </MotionButton>
 
       {!isFirstPage && (
@@ -47,18 +48,24 @@ function ProductGridPagination({
           onClick={() => {
             changePage(1);
           }}
+          className="col-start-2 text-center"
         >
           1
         </MotionButton>
       )}
-      {currentPageNumber > 2 && <p>...</p>}
+      {currentPageNumber > 2 && <Ellipsis className="col-start-3" />}
 
-      <p className="text-accent-1">{currentPageNumber} </p>
+      <p className="col-start-4 text-center text-accent-1">
+        {currentPageNumber}{" "}
+      </p>
 
-      {currentPageNumber + 1 < maxPageNumber && <p>...</p>}
+      {currentPageNumber + 1 < maxPageNumber && (
+        <Ellipsis className="col-start-5" />
+      )}
 
       {!isLastPage && (
         <MotionButton
+          className="col-start-6 text-center"
           onClick={() => {
             changePage(maxPageNumber);
           }}
@@ -68,12 +75,13 @@ function ProductGridPagination({
       )}
 
       <MotionButton
+        className="col-start-7 text-center"
         disableButton={isLastPage}
         onClick={() => {
           changePage(currentPageNumber + 1);
         }}
       >
-        <ArrowRight />
+        <ChevronRight />
       </MotionButton>
     </div>
   );

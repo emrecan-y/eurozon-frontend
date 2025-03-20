@@ -1,7 +1,7 @@
 import ProductGridElement from "./ProductGridElement";
 import { getProducts } from "@/api/api";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { PaginatedProductList, ProductQueryType } from "@/models/product";
 
 import ProductGridPagination from "./ProductGridPagination";
@@ -11,15 +11,13 @@ function ProductGrid() {
   const [paginatedProductList, setPaginatedProductList] =
     useState<PaginatedProductList>();
 
-  const navigate = useNavigate();
-
   const [query, setQuery] = useState<ProductQueryType>({
     page: 1,
     size: 12,
     category: "",
     searchString: "",
   });
-  const { size, page, searchString, category } = query;
+  const { searchString, category } = query;
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);

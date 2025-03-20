@@ -45,15 +45,20 @@ function NavBarCategoryButton({ category }: NavBarCategoryButtonProps) {
       const activeCategoryName = new URLSearchParams(location.search).get(
         "category",
       );
-      if (activeCategoryName === category.name) {
+      const categoryIsSelected = activeCategoryName === category.name;
+      if (categoryIsSelected) {
         setIsCategoryActive(true);
       } else {
         setIsCategoryActive(false);
       }
       if (
         hasChildren &&
-        activeCategoryName &&
-        childrenContainsCurrentCategory(category.children, activeCategoryName)
+        (categoryIsSelected ||
+          (activeCategoryName &&
+            childrenContainsCurrentCategory(
+              category.children,
+              activeCategoryName,
+            )))
       ) {
         setShowChildren(true);
       }
@@ -65,11 +70,12 @@ function NavBarCategoryButton({ category }: NavBarCategoryButtonProps) {
       <div className="flex">
         <MotionButton
           className={isCategoryActive ? "text-accent-2" : undefined}
-          onClick={() =>
+          onClick={() => {
+            setShowChildren(true);
             navigate(
               "/products?" + new URLSearchParams([["category", category.name]]),
-            )
-          }
+            );
+          }}
         >
           {category.name}
         </MotionButton>

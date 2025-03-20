@@ -30,6 +30,15 @@ export async function getProducts(query?: ProductQueryType) {
     });
 }
 
+export const getProductById = async (productId: UUID): Promise<Product> => {
+  const response = await axios.get<Product>("/products/id", {
+    params: {
+      productId: productId,
+    },
+  });
+  return response.data;
+};
+
 export async function tryLogin(data: Zod.infer<typeof LoginUserSchema>) {
   return axios
     .post<string>("/api/auth/login", data, {

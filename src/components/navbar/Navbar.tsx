@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MotionButton from "../ui/MotionButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -22,11 +22,13 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useUserQuery } from "../queries/useUserQuery";
+import { useGetShoppingCartPositions } from "../queries/useShoppingCartQuerys";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const shoppingCartPositionsQuery = useGetShoppingCartPositions();
 
   const userQuery = useUserQuery();
 
@@ -82,7 +84,7 @@ function Navbar() {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={() => {
-                          navigate("/userdata");
+                          navigate("/user/data");
                         }}
                       >
                         Persönliche Daten
@@ -127,7 +129,15 @@ function Navbar() {
 
             <Tooltip>
               <TooltipTrigger asChild className="w-fit">
-                <MotionButton onClick={() => navigate("/cart")}>
+                <MotionButton
+                  onClick={() => navigate("/shopping-cart")}
+                  className="relative"
+                >
+                  {Array.isArray(shoppingCartPositionsQuery.data) && (
+                    <p className="absolute -right-2 bottom-3.5 rounded-full bg-primary-text-3 px-1 text-sm text-primary-bg-3">
+                      {shoppingCartPositionsQuery.data.length}
+                    </p>
+                  )}
                   <ShoppingCart className="h-7 w-7" />
                 </MotionButton>
               </TooltipTrigger>

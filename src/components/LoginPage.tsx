@@ -40,7 +40,7 @@ function LoginPage() {
   };
 
   return (
-    <Card className="bg-primary-bg-2 text-primary-text-2 h-fit self-center overflow-hidden py-4 md:my-2">
+    <Card className="mx-2 h-fit self-center overflow-hidden bg-primary-bg-2 py-4 text-primary-text-2 md:my-2">
       <Form {...form}>
         <form
           className="flex flex-col items-center gap-3 p-6"
@@ -60,7 +60,7 @@ function LoginPage() {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="email"
                     placeholder="Email"
                     {...field}
@@ -78,7 +78,7 @@ function LoginPage() {
                 <FormLabel>Passwort</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="password"
                     placeholder="Passwort"
                     {...field}
@@ -90,7 +90,7 @@ function LoginPage() {
           />
           <MotionButton
             type="submit"
-            className="bg-accent-2 text-primary-bg-2 w-full rounded-lg py-2"
+            className="w-full rounded-lg bg-accent-2 py-2 text-primary-bg-2"
           >
             Login
           </MotionButton>

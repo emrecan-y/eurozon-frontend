@@ -34,7 +34,7 @@ function RegisterPage() {
   };
 
   return (
-    <Card className="bg-primary-bg-2 text-primary-text-2 mb-12 h-fit w-max self-center overflow-hidden py-4">
+    <Card className="mx-2 mb-12 h-fit self-center overflow-hidden bg-primary-bg-2 py-4 text-primary-text-2">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -73,7 +73,7 @@ function RegisterPage() {
                 <FormLabel>Passwort</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="password"
                     placeholder="Passwort"
                     {...field}
@@ -92,7 +92,7 @@ function RegisterPage() {
                 <FormLabel>Passwort wiederholen</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="password"
                     placeholder="Passwort"
                     {...field}
@@ -111,7 +111,7 @@ function RegisterPage() {
                 <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Name"
                     {...field}
@@ -130,7 +130,7 @@ function RegisterPage() {
                 <FormLabel>Nachname</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Nachname"
                     {...field}
@@ -149,7 +149,7 @@ function RegisterPage() {
                 <FormLabel>Straße</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Straße"
                     {...field}
@@ -168,7 +168,7 @@ function RegisterPage() {
                 <FormLabel>Straßennummer</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Straßennummer"
                     {...field}
@@ -187,7 +187,7 @@ function RegisterPage() {
                 <FormLabel>Stadt</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Stadt"
                     {...field}
@@ -206,7 +206,7 @@ function RegisterPage() {
                 <FormLabel>Postleitzahl</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Postleitzahl"
                     {...field}
@@ -225,7 +225,7 @@ function RegisterPage() {
                 <FormLabel>Land</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="text"
                     placeholder="Land"
                     {...field}
@@ -244,7 +244,7 @@ function RegisterPage() {
                 <FormLabel>Geburtsdatum</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-primary-bg-1 text-primary-text-1 w-full"
+                    className="w-full bg-primary-bg-1 text-primary-text-1"
                     type="date"
                     value={
                       field.value ? field.value.toISOString().split("T")[0] : ""
@@ -258,7 +258,7 @@ function RegisterPage() {
           />
 
           <MotionButton
-            className="bg-accent-2 text-primary-bg-2 w-full rounded-lg py-2 md:col-span-2"
+            className="w-full rounded-lg bg-accent-2 py-2 text-primary-bg-2 md:col-span-2"
             type="submit"
           >
             Registrieren

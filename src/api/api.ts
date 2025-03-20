@@ -30,6 +30,16 @@ export async function getProducts(query?: ProductQueryType) {
     });
 }
 
+export async function getTopProducts() {
+  return axios
+    .get<Product[]>("/products/top-ten",)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+
 export const getProductById = async (productId: UUID): Promise<Product> => {
   const response = await axios.get<Product>("/products/id", {
     params: {

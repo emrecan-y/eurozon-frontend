@@ -3,7 +3,6 @@ import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
 import { UUID } from "crypto";
 import { Image, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import { set } from "react-hook-form";
 import {
   Tooltip,
   TooltipTrigger,

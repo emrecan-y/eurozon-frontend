@@ -64,7 +64,7 @@ function ShoppingCartPage() {
         .map((cartItem) => (
           <div
             key={cartItem.id}
-            className="flex h-64 w-5/6 flex-row items-center justify-center rounded-2xl bg-primary-bg-2 p-4 shadow-xl lg:w-3/5"
+            className="flex h-64 w-5/6 flex-row items-center justify-center border border-primary-bg-3 rounded-2xl bg-primary-bg-2 p-4 shadow-xl lg:w-3/5"
           >
             <img
               src={cartItem.product.imageUrl}
@@ -94,7 +94,7 @@ function ShoppingCartPage() {
                   }
                   min={1}
                   max={10}
-                  className="h-6 w-12 rounded border border-gray-300 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                  className="h-6 w-12 rounded border border-gray-300 text-center text-gray-700 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                 />
                 <button
                   onClick={() =>
@@ -114,7 +114,7 @@ function ShoppingCartPage() {
             </div>
           </div>
         ))}
-      <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border bg-white p-12 shadow-lg">
+      <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-primary-bg-3 bg-primary-bg-2 p-12 shadow-lg">
         <p className="font-bold">Gesamtpreis: {total.toFixed(2)} €</p>
         <p className="font-semibold">Artikelanzahl: {productCount}</p>
         <button

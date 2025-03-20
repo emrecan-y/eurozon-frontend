@@ -3,15 +3,18 @@ import NavBarCategoryButton from "./NavBarCategoryButton";
 
 function NavBarCategories() {
   const mainCategoriesQuery = useMainCategoriesQuery();
+
   return (
     <>
       {mainCategoriesQuery &&
         Array.isArray(mainCategoriesQuery.data) &&
-        mainCategoriesQuery.data.map((c) => (
-          <NavBarCategoryButton
-            key={"nav-button-" + c.name.toLowerCase()}
-            category={c.name}
-          />
+        mainCategoriesQuery.data.map((category) => (
+          <>
+            <NavBarCategoryButton
+              key={"nav-button-" + category.name.toLowerCase()}
+              category={category}
+            />
+          </>
         ))}
     </>
   );

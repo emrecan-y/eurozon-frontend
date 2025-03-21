@@ -22,7 +22,7 @@ function HomePageProductCard({ product }: HomePageProductCardProps) {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
   const handleBuyButton = (productId: UUID) => {
-    if (userQuery.data?.id && cookies.access_token) {
+    if (userQuery.data?.name && cookies.access_token) {
       addMutation.mutate({ productId, amount: 1 });
     } else {
       toast.error("Für diese Funktion müssen Sie sich anmelden.");

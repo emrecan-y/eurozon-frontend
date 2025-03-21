@@ -9,19 +9,23 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import HomePageProductCard from "./HomePageProductCard";
+import axios from "axios";
 
 function HomePage() {
+
   const [topList, setTopList] = useState<Product[]>();
   const [technikList, setTechnikList] = useState<Product[]>();
   const [sportList, setSportList] = useState<Product[]>();
   const [lebensmittelList, setLebensmittelList] = useState<Product[]>();
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     getProducts({
       category: "technik",
       searchString: "",
       size: 12,
       page: 1,
+      cancelToken: source.token,
     }).then((e) => {
       setTechnikList(e?.products);
     });
@@ -30,6 +34,7 @@ function HomePage() {
       searchString: "",
       size: 12,
       page: 1,
+      cancelToken: source.token,
     }).then((e) => {
       setSportList(e?.products);
     });
@@ -38,6 +43,7 @@ function HomePage() {
       searchString: "",
       size: 12,
       page: 1,
+      cancelToken: source.token,
     }).then((e) => {
       setLebensmittelList(e?.products);
     });
@@ -53,7 +59,7 @@ function HomePage() {
     products?: Product[];
     title: string;
   }) => (
-    <div className="w-72 lg:w-full lg:max-w-7xl lg:py-2">
+    <div className="max-w-72 w-full  md:max-w-2xl lg:max-w-7xl lg:py-2">
       <h2 className="mb-4 text-lg font-bold lg:text-2xl">{title}</h2>
       {products && products.length > 0 ? (
         <Carousel
@@ -68,7 +74,7 @@ function HomePage() {
             {products.map((product) => (
               <CarouselItem
                 key={product.id}
-                className="basis-2/4 md:basis-2/5 lg:basis-1/5"
+                className="basis-2/4 md:basis-2/6 lg:basis-1/5"
               >
                 <HomePageProductCard product={product} />
               </CarouselItem>

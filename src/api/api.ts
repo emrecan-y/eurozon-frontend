@@ -7,14 +7,16 @@ import {
 import { ShoppingCartPosition } from "@/models/shoppingcartPosition";
 import { LoginUserSchema, RegisterUserSchema, User } from "@/models/user";
 import { getCookie } from "@/util/util";
-import axios from "axios";
 import { UUID } from "crypto";
 import { updateShoppingCartPositionDto } from "./dtos/updateShoppingCartPositionDto";
 import { Order } from "@/models/order";
+import axios, { CancelToken } from "axios";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
-export async function getProducts(query?: ProductQueryType) {
+export async function getProducts(
+  query: ProductQueryType & { cancelToken: CancelToken },
+): Promise<PaginatedProductList> {
   return axios
     .get<PaginatedProductList>("/products", {
       params: {
@@ -23,33 +25,51 @@ export async function getProducts(query?: ProductQueryType) {
         size: query?.size,
         searchString: query?.searchString,
       },
+      cancelToken: query.cancelToken,
     })
-    .then((response) => response.data)
+    .then((response) => {
+      return response.data;
+    })
     .catch((error) => {
-      console.log(error);
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
     });
 }
 
-export async function getTopProducts() {
+export async function getTopProducts(): Promise<Product[]> {
   return axios
-    .get<Product[]>("/products/top-ten",)
-    .then((response) => response.data)
+    .get<Product[]>("/products/top-ten")
+    .then((response) => {
+      return response.data;
+    })
     .catch((error) => {
-      console.log(error);
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
     });
 }
 
+export async function getProductById(productId: UUID): Promise<Product> {
+  return axios
+    .get<Product>("/products/id", {
+      params: {
+        productId: productId,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
+    });
+}
 
-export const getProductById = async (productId: UUID): Promise<Product> => {
-  const response = await axios.get<Product>("/products/id", {
-    params: {
-      productId: productId,
-    },
-  });
-  return response.data;
-};
-
-export async function tryLogin(data: Zod.infer<typeof LoginUserSchema>) {
+export async function tryLogin(
+  data: Zod.infer<typeof LoginUserSchema>,
+): Promise<string> {
   return axios
     .post<string>("/api/auth/login", data, {
       headers: {
@@ -60,11 +80,15 @@ export async function tryLogin(data: Zod.infer<typeof LoginUserSchema>) {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
     });
 }
 
-export async function register(data: Zod.infer<typeof RegisterUserSchema>) {
+export async function register(
+  data: Zod.infer<typeof RegisterUserSchema>,
+): Promise<string> {
   return axios
     .post<string>("api/auth/register", data, {
       headers: {
@@ -72,18 +96,16 @@ export async function register(data: Zod.infer<typeof RegisterUserSchema>) {
       },
     })
     .then((response) => {
-      if (response.status === 200) {
-        true;
-      }
-      return false;
+      return response.data;
     })
     .catch((error) => {
-      console.log(error);
-      return false;
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
     });
 }
 
-export async function getUser() {
+export async function getUser(): Promise<User> {
   return axios
     .get<User>("/api/auth/who-am-i", {
       headers: {
@@ -94,78 +116,134 @@ export async function getUser() {
       return response.data;
     })
     .catch((error) => {
-      return null;
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
     });
 }
 
-export async function getMainCategories() {
+export async function getMainCategories(): Promise<Category[]> {
   return axios
     .get<Category[]>("/categories/main")
-    .then((response) => response.data)
+    .then((response) => {
+      return response.data;
+    })
     .catch((error) => {
-      return null;
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
     });
 }
 
-export const getShoppingCartPositions = async (): Promise<
+export async function getShoppingCartPositions(): Promise<
   ShoppingCartPosition[]
-> => {
-  const response = await axios.get<ShoppingCartPosition[]>("/cart", {
-    headers: {
-      Authorization: "Bearer " + getCookie("access_token"),
-    },
-  });
-  return response.data;
-};
+> {
+  return axios
+    .get<ShoppingCartPosition[]>("/cart", {
+      headers: {
+        Authorization: "Bearer " + getCookie("access_token"),
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
+    });
+}
 
 export async function addShoppingCartPosition(
   dto: updateShoppingCartPositionDto,
-) {
-  const response = await axios.post<ShoppingCartPosition>("/cart", null, {
-    params: dto,
-    headers: {
-      Authorization: "Bearer " + getCookie("access_token"),
-    },
-  });
-  return response.data;
+): Promise<string> {
+  return axios
+    .post<string>("/cart", null, {
+      params: dto,
+      headers: {
+        Authorization: "Bearer " + getCookie("access_token"),
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
+    });
 }
 
-export async function removeShoppingCartPosition(productId: UUID) {
-  const response = await axios.delete("/cart", {
-    params: { productId },
-    headers: {
-      Authorization: "Bearer " + getCookie("access_token"),
-    },
-  });
-  return response.data;
+export async function removeShoppingCartPosition(
+  productId: UUID,
+): Promise<string> {
+  return axios
+    .delete<string>("/cart", {
+      params: { productId },
+      headers: {
+        Authorization: "Bearer " + getCookie("access_token"),
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
+    });
 }
 
 export async function updateShoppingCartPosition(
   dto: updateShoppingCartPositionDto,
-) {
-  const response = await axios.put<ShoppingCartPosition>("/cart", null, {
-    params: dto,
-    headers: {
-      Authorization: "Bearer " + getCookie("access_token"),
-    },
-  });
-  return response.data;
+): Promise<string> {
+  return axios
+    .put<string>("/cart", null, {
+      params: dto,
+      headers: {
+        Authorization: "Bearer " + getCookie("access_token"),
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
+    });
 }
 
-export async function addOrder() {
-  const response = await axios.post<Order>("/orders", null, {
-    headers: {
-      Authorization: "Bearer " + getCookie("access_token"),
-    },
-  });
-  return response.data;
+export async function addOrder(): Promise<string> {
+  return axios
+    .post<string>("/orders", null, {
+      headers: {
+        Authorization: "Bearer " + getCookie("access_token"),
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
+    });
 }
 
-export const getOrders = async (): Promise<Order[]> => {
-  const response = await axios.get<Order[]>("/orders", {
-    headers: {
-      Authorization: "Bearer " + getCookie("access_token"),
-    },
-  });
-  return response.data;
-};
+export async function getOrders(): Promise<Order[]> {
+  return axios
+    .get<Order[]>("/orders", {
+      headers: {
+        Authorization: "Bearer " + getCookie("access_token"),
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return Promise.reject(
+        error?.response?.data || "An unexpected error occurred.",
+      );
+    });
+}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import MotionButton from "../ui/MotionButton";
+import ImageLoader from "../ui/ImageLoader";
 
 type OrderHistoryElementProps = {
   order: Order;
@@ -97,11 +98,10 @@ function OrderHistoryElement({ order }: OrderHistoryElementProps) {
               {Array.isArray(order.orderPositions) &&
                 order.orderPositions.map((orderPos) => (
                   <div className="flex items-center justify-between border-b border-primary-text-2 pb-1">
-                    <div className="h-20 w-20 sm:h-24 sm:w-24">
-                      <img
-                        className="h-full w-full rounded-lg border object-cover shadow-md"
-                        src={orderPos.product.imageUrl}
-                      ></img>
+                    <div className="h-20 w-20 rounded-lg border shadow-md sm:h-24 sm:w-24">
+                      <ImageLoader
+                        imageUrl={orderPos.product.imageUrl}
+                      ></ImageLoader>
                     </div>
 
                     <div className="flex flex-1 flex-col p-2">

@@ -16,27 +16,28 @@ export const UserDataPage = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center self-center w-1/2 p-6 gap-2 rounded-2xl shadow-xl mt-8 bg-primary-bg-2 ">
-      <h1 className="font-bold text-xl">User Informationen</h1>
-      <div className="grid grid-cols-2 gap-4 mt-7">
-          <p className="font-semibold">E-Mail:</p> <p>{data.email}</p>
-          <p className="font-semibold">Name:</p>
-          <p>
-            {data.surname} {data.name}
-          </p>
-          <p className="font-semibold">Geburtstag:</p> <p>{new Date(data.dateOfBirth).toLocaleDateString()}</p>
-          <p className="font-semibold mt-6">Adresse</p>
-          <p></p>
-          <p className="font-semibold">City:</p>{" "}
-          <p>{data.address.town}</p>
-          <p className="font-semibold">Zip Code:</p>{" "}
-          <p>{data.address.postalCode}</p>
-          <p className="font-semibold">Street:</p>{" "}
-          <p>{data.address.street}</p>
-          <p className="font-semibold">Street-Nr:</p>{" "}
-          <p>{data.address.streetNumber}</p>
-        </div>
-        <button className="bg-blue-600 p-2 rounded-md mt-4">Adresse ändern</button>
+    <div className="mx-2 mt-8 flex flex-col items-center justify-center gap-2 self-center rounded-2xl bg-primary-bg-2 p-6 text-sm shadow-xl sm:text-base">
+      <h1 className="text-xl font-bold">Persönliche daten</h1>
+      <div className="mt-7 grid grid-cols-2 gap-1">
+        <p className="font-semibold">E-Mail:</p> <p>{data.email}</p>
+        <p className="font-semibold">Name:</p>
+        <p>
+          {data.surname} {data.name}
+        </p>
+        <p className="font-semibold">Geburtstag:</p>{" "}
+        <p>{new Date(data.dateOfBirth).toLocaleDateString()}</p>
+        <p className="mt-6 font-semibold">Adresse</p>
+        <p></p>
+        <p className="font-semibold">Stadt:</p> <p>{data.address.town}</p>
+        <p className="font-semibold">Postleitzahl:</p>
+        <p>{data.address.postalCode}</p>
+        <p className="font-semibold">Straße:</p> <p>{data.address.street}</p>
+        <p className="font-semibold">Straßennr.:</p>{" "}
+        <p>{data.address.streetNumber}</p>
+      </div>
+      <button className="mt-4 rounded-md bg-blue-600 p-2">
+        Adresse bearbeiten
+      </button>
     </div>
   );
 };

@@ -6,6 +6,11 @@ import {
 } from "./queries/useShoppingCartQuerys";
 import { useAddOrders } from "./queries/useOrdersQuery";
 import { useEffect, useState } from "react";
+import { useUserQuery } from "./queries/useUserQuery";
+import { useCookies } from "react-cookie";
+import { Trash2 } from "lucide-react";
+import NumberInputWithIncrement from "./ui/NumberInputWithIncrement";
+import MotionButton from "./ui/MotionButton";
 
 function ShoppingCartPage() {
   const {
@@ -13,6 +18,9 @@ function ShoppingCartPage() {
     isLoading,
     isError,
   } = useGetShoppingCartPositions();
+
+  const userQuery = useUserQuery();
+  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
   const updateMutation = useUpdateShoppingCartPosition();
   const removeMutation = useRemoveShoppingCartPosition();
@@ -50,6 +58,10 @@ function ShoppingCartPage() {
     }
   };
 
+  if (!cookies.access_token || !userQuery.data?.name) {
+    return <div>Für diese Funktion müssen Sie sich anmelden.</div>;
+  }
+
   if (isLoading) {
     return <div>ICH BIN LOADING</div>;
   }
@@ -58,13 +70,13 @@ function ShoppingCartPage() {
   }
 
   return (
-    <div className="my-12 flex h-full w-full flex-col items-center justify-center gap-6">
+    <div className="mx-2 my-12 flex h-full flex-col gap-6 self-center">
       {shoppingCartList
         .sort((a, b) => a.product.id.localeCompare(b.product.id))
         .map((cartItem) => (
           <div
             key={cartItem.id}
-            className="flex h-64 w-5/6 flex-row items-center justify-center border border-primary-bg-3 rounded-2xl bg-primary-bg-2 p-4 shadow-xl lg:w-3/5"
+            className="flex h-64 w-full flex-row items-center justify-center rounded-lg border border-primary-bg-3 bg-primary-bg-2 p-4 shadow-xl"
           >
             <img
               src={cartItem.product.imageUrl}
@@ -74,43 +86,17 @@ function ShoppingCartPage() {
               <p className="font-bold">{cartItem.product.name}</p>
               <p>{cartItem.product.description}</p>
               <p className="font-bold">{cartItem.product.price}€</p>
-              <div className="flex items-center justify-center gap-1">
-                <button
-                  onClick={() =>
-                    handleAmountChange(cartItem.amount - 1, cartItem.product.id)
-                  }
-                  className="mb-1 h-6 w-6 text-lg transition-colors hover:bg-gray-200"
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  value={cartItem.amount}
-                  onChange={(e) =>
-                    handleAmountChange(
-                      Number.parseInt(e.target.value),
-                      cartItem.product.id,
-                    )
-                  }
-                  min={1}
-                  max={10}
-                  className="h-6 w-12 rounded border border-gray-300 text-center text-gray-700 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                />
-                <button
-                  onClick={() =>
-                    handleAmountChange(cartItem.amount + 1, cartItem.product.id)
-                  }
-                  className="mb-1 h-6 w-6 self-center text-center align-middle text-lg transition-colors hover:bg-gray-200"
-                >
-                  +
-                </button>
-              </div>
-              <button
-                className="rounded-md bg-red-700 px-2 py-1 text-gray-100 transition-all hover:cursor-pointer hover:bg-red-600 lg:p-2 lg:text-base"
+              <NumberInputWithIncrement
+                value={cartItem.amount}
+                setValue={(value) => {
+                  handleAmountChange(value, cartItem.product.id);
+                }}
+              />
+              <MotionButton
                 onClick={() => handleRemoveButton(cartItem.product.id)}
               >
-                Item Entfernen
-              </button>
+                <Trash2 />
+              </MotionButton>
             </div>
           </div>
         ))}

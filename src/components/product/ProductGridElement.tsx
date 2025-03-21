@@ -26,7 +26,7 @@ function ProductGridElement({ product }: ProductGridElement) {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
   const handleBuyButton = (productId: UUID) => {
-    if (userQuery.data?.id && cookies.access_token) {
+    if (userQuery.data?.name && cookies.access_token) {
       addMutation.mutate({ productId, amount });
     } else {
       toast.error("Für diese Funktion müssen Sie sich anmelden.");

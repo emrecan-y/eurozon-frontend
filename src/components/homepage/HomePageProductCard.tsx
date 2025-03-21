@@ -11,6 +11,7 @@ import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
 import { useUserQuery } from "../queries/useUserQuery";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
+import ImageLoader from "../ui/ImageLoader";
 
 type HomePageProductCardProps = {
   product: Product;
@@ -32,11 +33,8 @@ function HomePageProductCard({ product }: HomePageProductCardProps) {
   return (
     <div className="p-4">
       <div className="flex h-56 w-32 flex-col items-center justify-around gap-1 rounded-lg border border-primary-bg-3 bg-primary-bg-2 p-4 text-center shadow-lg lg:h-72 lg:w-56">
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="h-32 object-cover"
-        />
+        <ImageLoader imageUrl={product.imageUrl} />
+
         <h3 className="mt-2 text-sm font-semibold lg:text-base">
           {product.name}
         </h3>

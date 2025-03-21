@@ -1,7 +1,7 @@
 import { Product } from "@/models/product";
 import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
 import { UUID } from "crypto";
-import { Image, Minus, Plus, ShoppingCart } from "lucide-react";
+import { Image, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import {
   Tooltip,
@@ -13,13 +13,13 @@ import { useUserQuery } from "../queries/useUserQuery";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import NumberInputWithIncrement from "../ui/NumberInputWithIncrement";
+import ImageLoader from "../ui/ImageLoader";
 
 type ProductGridElement = {
   product?: Product;
 };
 
 function ProductGridElement({ product }: ProductGridElement) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const addMutation = useAddShoppingCartPosition();
   const [amount, setAmount] = useState<number>(1);
   const userQuery = useUserQuery();
@@ -33,30 +33,11 @@ function ProductGridElement({ product }: ProductGridElement) {
     }
   };
 
-  const handleSetAmountChange = (newAmount: number) => {
-    if (newAmount > 9) {
-    } else if (newAmount >= 1) {
-      setAmount(newAmount);
-    } else {
-      setAmount(1);
-    }
-  };
-
   if (product) {
     return (
       <div className="flex w-full flex-col items-center gap-3 rounded-lg border-2 border-primary-bg-3 bg-primary-bg-2 p-3 shadow-md">
-        <div className="col-span-3 flex h-full w-full items-center justify-center bg-primary-bg-2 bg-white">
-          <img
-            src={product.imageUrl}
-            className={`h-full w-full object-contain text-primary-text-2 ${!imageLoaded && "hidden"}`}
-            onLoad={() => {
-              setImageLoaded(true);
-            }}
-            onError={() => {}}
-          />
-          {!imageLoaded && (
-            <Image className="h-5/6 w-5/6 text-primary-text-2" />
-          )}
+        <div className="col-span-3 flex h-full min-h-52 w-full items-center justify-center bg-primary-bg-2 bg-white">
+          <ImageLoader imageUrl={product.imageUrl} />
         </div>
         <div className="flex w-full">
           <div className="flex w-full flex-1 flex-col self-center pl-1">

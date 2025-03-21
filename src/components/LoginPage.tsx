@@ -16,6 +16,7 @@ import {
 } from "./ui/form";
 import { tryLogin } from "@/api/api";
 import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 
 function LoginPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
@@ -35,6 +36,7 @@ function LoginPage() {
     tryLogin(loginDate).then((accessToken) => {
       if (accessToken) {
         setJwtCookie(accessToken);
+        toast.success("Erfolgreich eingeloggt.");
       }
     });
   };

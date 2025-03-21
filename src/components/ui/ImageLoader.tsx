@@ -40,14 +40,14 @@ function ImageLoader({ imageUrl }: ImageLoaderProps) {
         }}
       />
       {loadState === "ERROR" || imageUrl === undefined ? (
-        <div className="flex h-full w-full flex-col items-center justify-center">
-          <Image className="text-primary-text-2" />
+        <div className="flex h-full w-full flex-col items-center justify-center bg-primary-bg-3">
+          <Image className="text-primary-text-3" />
           <p>No image</p>
         </div>
       ) : (
         loadState === "LOADING" && (
-          <div className="flex h-full w-full items-center justify-center">
-            <span className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary-text-2 border-b-transparent"></span>
+          <div className="flex h-full w-full items-center justify-center bg-primary-bg-3">
+            <span className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary-text-3 border-b-transparent"></span>
           </div>
         )
       )}

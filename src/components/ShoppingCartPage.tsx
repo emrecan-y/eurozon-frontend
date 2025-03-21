@@ -11,6 +11,7 @@ import { useCookies } from "react-cookie";
 import { Trash2 } from "lucide-react";
 import NumberInputWithIncrement from "./ui/NumberInputWithIncrement";
 import MotionButton from "./ui/MotionButton";
+import ImageLoader from "./ui/ImageLoader";
 
 function ShoppingCartPage() {
   const {
@@ -70,41 +71,47 @@ function ShoppingCartPage() {
   }
 
   return (
-    <div className="mx-2 my-12 flex h-full flex-col gap-6 self-center">
-      {shoppingCartList
-        .sort((a, b) => a.product.id.localeCompare(b.product.id))
-        .map((cartItem) => (
-          <div
-            key={cartItem.id}
-            className="flex h-64 w-full flex-row items-center justify-center rounded-lg border border-primary-bg-3 bg-primary-bg-2 p-4 shadow-xl"
-          >
-            <img
-              src={cartItem.product.imageUrl}
-              className="h-1/2 px-2 text-primary-text-2 lg:h-4/5 lg:pl-12"
-            />
-            <div className="flex w-full flex-col items-center justify-center gap-1 rounded-lg p-2 px-6 text-center text-sm lg:gap-3 lg:text-base">
-              <p className="font-bold">{cartItem.product.name}</p>
-              <p>{cartItem.product.description}</p>
-              <p className="font-bold">{cartItem.product.price}€</p>
-              <NumberInputWithIncrement
-                value={cartItem.amount}
-                setValue={(value) => {
-                  handleAmountChange(value, cartItem.product.id);
-                }}
-              />
-              <MotionButton
-                onClick={() => handleRemoveButton(cartItem.product.id)}
-              >
-                <Trash2 />
-              </MotionButton>
+    <div className="mx-2 my-6 flex h-full flex-col gap-6 self-center lg:my-12 lg:flex-row">
+      <div className="mx-2 flex h-full flex-col gap-6 self-center px-2 lg:px-4">
+        {shoppingCartList
+          .sort((a, b) => a.product.id.localeCompare(b.product.id))
+          .map((cartItem) => (
+            <div
+              key={cartItem.id}
+              className="flex h-fit w-full flex-row items-center justify-center rounded-xl border border-primary-bg-3 bg-primary-bg-2 p-4 lg:px-10 shadow-xl"
+            >
+              <div>
+                <div className="h-32 w-32 rounded-lg ml-8 sm:h-52 sm:w-52">
+                  <ImageLoader
+                    imageUrl={cartItem.product.imageUrl}
+                  ></ImageLoader>
+                </div>
+              </div>
+              <div className="flex w-full flex-col items-center justify-center gap-1 rounded-xl p-2 px-6 text-center text-sm lg:gap-3 lg:text-base">
+                <p className="font-bold">{cartItem.product.name}</p>
+                <p className="text-xs lg:text-sm">{cartItem.product.description}</p>
+                <p className="font-bold">{cartItem.product.price}€</p>
+                <NumberInputWithIncrement
+                  value={cartItem.amount}
+                  setValue={(value) => {
+                    handleAmountChange(value, cartItem.product.id);
+                  }}
+                />
+                <MotionButton
+                  onClick={() => handleRemoveButton(cartItem.product.id)}
+                >
+                  <Trash2 />
+                </MotionButton>
+              </div>
             </div>
-          </div>
-        ))}
-      <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-primary-bg-3 bg-primary-bg-2 p-12 shadow-lg">
+          ))}
+      </div>
+      <div className="sticky top-24 flex h-fit flex-col items-center justify-center gap-2 rounded-xl border border-primary-bg-3 bg-primary-bg-2 p-12 shadow-lg">
         <p className="font-bold">Gesamtpreis: {total.toFixed(2)} €</p>
-        <p className="font-semibold">Artikelanzahl: {productCount}</p>
+        <p className="text-sm text-accent-1">Versandkosten frei</p>
+        <p className="p-2 font-semibold">Artikelanzahl: {productCount}</p>
         <button
-          className="rounded-md bg-green-700 p-2 text-gray-100 transition-all hover:cursor-pointer hover:bg-green-600 disabled:opacity-50"
+          className="rounded-md bg-primary-text-2 p-2 text-primary-bg-2 transition-all hover:cursor-pointer hover:bg-green-600 disabled:opacity-50"
           onClick={handleBuyButton}
           disabled={shoppingCartList.length <= 0 ? true : false}
         >

@@ -41,9 +41,9 @@ function RegisterPage() {
           className="grid w-full grid-cols-1 gap-3 p-6 md:grid-cols-2"
         >
           <div className="mb-2 flex flex-col items-center text-center md:col-span-2">
-            <h1 className="text-xl font-bold">Welcome to eurozon!</h1>
+            <h1 className="text-xl font-bold">Wilkommen bei eurozon!</h1>
             <p className="text-muted-foreground text-balance">
-              Create a new account
+              Erstellen Sie ein Account
             </p>
           </div>
           <FormField

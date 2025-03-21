@@ -32,7 +32,7 @@ function ProductGridPagination({
   }
 
   return (
-    <div className="grid w-fit grid-cols-7 items-center self-center p-4 text-xl">
+    <div className="grid h-fit w-fit grid-cols-7 items-center p-4 text-xl">
       <MotionButton
         disableButton={isFirstPage}
         onClick={() => {

@@ -7,7 +7,6 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import NavBarCategories from "./NavBarCategories";
 import NavBarSearchBar from "./NavBarSearchBar";
 import { Menu, Moon, ShoppingCart, Sun, User, X } from "lucide-react";
-import { useCookies } from "react-cookie";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,16 +16,14 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useGetShoppingCartPositions } from "../queries/useShoppingCartQuerys";
-import useDarkMode from "../hooks/useDarkMode";
-import { useQueryClient } from "@tanstack/react-query";
-import { useAuthUser } from "../hooks/useAuthUser";
+import useDarkMode from "../../hooks/useDarkMode";
+import { useAuthUser } from "../../hooks/useAuthUser";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const shoppingCartPositionsQuery = useGetShoppingCartPositions();
 
-  const queryClient = useQueryClient();
   const { user, logout } = useAuthUser();
   const { darkMode, toggleDarkMode } = useDarkMode();
 

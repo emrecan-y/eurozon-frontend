@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import AppRoutes from "./AppRoutes";
 import { ToastContainer } from "react-toastify";
-import useDarkMode from "./components/hooks/useDarkMode";
+import useDarkMode from "./hooks/useDarkMode";
 import { X } from "lucide-react";
 import MotionButton from "./components/ui/MotionButton";
 

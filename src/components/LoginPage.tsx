@@ -16,7 +16,7 @@ import {
 } from "./ui/form";
 import { tryLogin } from "@/api/api";
 import { toast } from "react-toastify";
-import { useAuthUser } from "./hooks/useAuthUser";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 function LoginPage() {
   const { setAccessToken } = useAuthUser();

@@ -10,7 +10,7 @@ import { UUID } from "crypto";
 import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
 import { toast } from "react-toastify";
 import ImageLoader from "../ui/ImageLoader";
-import { useAuthUser } from "../hooks/useAuthUser";
+import { useAuthUser } from "../../hooks/useAuthUser";
 
 type HomePageProductCardProps = {
   product: Product;

@@ -10,7 +10,7 @@ import { Trash2 } from "lucide-react";
 import NumberInputWithIncrement from "./ui/NumberInputWithIncrement";
 import MotionButton from "./ui/MotionButton";
 import ImageLoader from "./ui/ImageLoader";
-import { useAuthUser } from "./hooks/useAuthUser";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 function ShoppingCartPage() {
   const {

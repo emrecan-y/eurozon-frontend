@@ -1,4 +1,4 @@
-import { useAuthUser } from "./hooks/useAuthUser";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 export const UserDataPage = () => {
   const { user, userIsLoading } = useAuthUser();

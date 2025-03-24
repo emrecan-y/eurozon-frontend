@@ -1,7 +1,7 @@
 import { Product } from "@/models/product";
 import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
 import { UUID } from "crypto";
-import { Image, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import {
   Tooltip,
@@ -9,11 +9,10 @@ import {
   TooltipContent,
 } from "@radix-ui/react-tooltip";
 import MotionButton from "../ui/MotionButton";
-import { useUserQuery } from "../queries/useUserQuery";
 import { toast } from "react-toastify";
-import { useCookies } from "react-cookie";
 import NumberInputWithIncrement from "../ui/NumberInputWithIncrement";
 import ImageLoader from "../ui/ImageLoader";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 type ProductGridElement = {
   product?: Product;
@@ -22,11 +21,10 @@ type ProductGridElement = {
 function ProductGridElement({ product }: ProductGridElement) {
   const addMutation = useAddShoppingCartPosition();
   const [amount, setAmount] = useState<number>(1);
-  const userQuery = useUserQuery();
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const { user } = useAuthUser();
 
   const handleBuyButton = (productId: UUID) => {
-    if (userQuery.data?.name && cookies.access_token) {
+    if (user) {
       addMutation.mutate({ productId, amount });
     } else {
       toast.error("Für diese Funktion müssen Sie sich anmelden.");

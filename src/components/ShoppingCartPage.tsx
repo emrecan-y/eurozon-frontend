@@ -6,12 +6,11 @@ import {
 } from "./queries/useShoppingCartQuerys";
 import { useAddOrders } from "./queries/useOrdersQuery";
 import { useEffect, useState } from "react";
-import { useUserQuery } from "./queries/useUserQuery";
-import { useCookies } from "react-cookie";
 import { Trash2 } from "lucide-react";
 import NumberInputWithIncrement from "./ui/NumberInputWithIncrement";
 import MotionButton from "./ui/MotionButton";
 import ImageLoader from "./ui/ImageLoader";
+import { useAuthUser } from "./hooks/useAuthUser";
 
 function ShoppingCartPage() {
   const {
@@ -20,8 +19,7 @@ function ShoppingCartPage() {
     isError,
   } = useGetShoppingCartPositions();
 
-  const userQuery = useUserQuery();
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const { user } = useAuthUser();
 
   const updateMutation = useUpdateShoppingCartPosition();
   const removeMutation = useRemoveShoppingCartPosition();
@@ -59,7 +57,7 @@ function ShoppingCartPage() {
     }
   };
 
-  if (!cookies.access_token || !userQuery.data?.name) {
+  if (!user) {
     return <div>Für diese Funktion müssen Sie sich anmelden.</div>;
   }
 
@@ -78,10 +76,10 @@ function ShoppingCartPage() {
           .map((cartItem) => (
             <div
               key={cartItem.id}
-              className="flex h-fit w-full flex-row items-center justify-center rounded-xl border border-primary-bg-3 bg-primary-bg-2 p-4 lg:px-10 shadow-xl"
+              className="flex h-fit w-full flex-row items-center justify-center rounded-xl border border-primary-bg-3 bg-primary-bg-2 p-4 shadow-xl lg:px-10"
             >
               <div>
-                <div className="h-32 w-32 rounded-lg ml-8 sm:h-52 sm:w-52">
+                <div className="ml-8 h-32 w-32 rounded-lg sm:h-52 sm:w-52">
                   <ImageLoader
                     imageUrl={cartItem.product.imageUrl}
                   ></ImageLoader>
@@ -89,7 +87,9 @@ function ShoppingCartPage() {
               </div>
               <div className="flex w-full flex-col items-center justify-center gap-1 rounded-xl p-2 px-6 text-center text-sm lg:gap-3 lg:text-base">
                 <p className="font-bold">{cartItem.product.name}</p>
-                <p className="text-xs lg:text-sm">{cartItem.product.description}</p>
+                <p className="text-xs lg:text-sm">
+                  {cartItem.product.description}
+                </p>
                 <p className="font-bold">{cartItem.product.price}€</p>
                 <NumberInputWithIncrement
                   value={cartItem.amount}

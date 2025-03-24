@@ -15,11 +15,11 @@ import {
   FormMessage,
 } from "./ui/form";
 import { tryLogin } from "@/api/api";
-import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
+import { useAuthUser } from "./hooks/useAuthUser";
 
 function LoginPage() {
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const { setAccessToken } = useAuthUser();
 
   type LoginForm = z.infer<typeof LoginUserSchema>;
   const form = useForm<LoginForm>({
@@ -29,7 +29,7 @@ function LoginPage() {
   function setJwtCookie(accessToken: string) {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 1);
-    setCookie("access_token", accessToken, { expires: expirationDate });
+    setAccessToken(accessToken, expirationDate);
   }
 
   const onSubmit = (loginDate: LoginForm) => {

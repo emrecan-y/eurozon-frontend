@@ -12,7 +12,6 @@ import HomePageProductCard from "./HomePageProductCard";
 import axios from "axios";
 
 function HomePage() {
-
   const [topList, setTopList] = useState<Product[]>();
   const [technikList, setTechnikList] = useState<Product[]>();
   const [sportList, setSportList] = useState<Product[]>();
@@ -59,7 +58,7 @@ function HomePage() {
     products?: Product[];
     title: string;
   }) => (
-    <div className="max-w-72 w-full  md:max-w-2xl lg:max-w-7xl lg:py-2">
+    <div className="w-full max-w-72 md:max-w-2xl lg:max-w-7xl lg:py-2">
       <h2 className="mb-4 text-lg font-bold lg:text-2xl">{title}</h2>
       {products && products.length > 0 ? (
         <Carousel

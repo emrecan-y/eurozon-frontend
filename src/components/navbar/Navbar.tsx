@@ -16,19 +16,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useUserQuery } from "../queries/useUserQuery";
 import { useGetShoppingCartPositions } from "../queries/useShoppingCartQuerys";
 import useDarkMode from "../hooks/useDarkMode";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
   const shoppingCartPositionsQuery = useGetShoppingCartPositions();
 
   const queryClient = useQueryClient();
-  const userQuery = useUserQuery();
+  const { user, logout } = useAuthUser();
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -88,10 +87,10 @@ function Navbar() {
                 </TooltipContent>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="border-2 bg-primary-bg-2 text-primary-text-2 shadow-lg">
-                {cookies.access_token ? (
+                {user ? (
                   <>
                     <DropdownMenuLabel className="border-b-[1px]">
-                      {userQuery?.data?.name + " " + userQuery?.data?.surname}
+                      {user.name + " " + user.surname}
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
@@ -108,13 +107,7 @@ function Navbar() {
                     >
                       Bestellhistorie
                     </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="text-red-500"
-                      onClick={() => {
-                        removeCookie("access_token");
-                        queryClient.clear();
-                      }}
-                    >
+                    <DropdownMenuItem className="text-red-500" onClick={logout}>
                       Abmelden
                     </DropdownMenuItem>
                   </>

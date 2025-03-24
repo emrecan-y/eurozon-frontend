@@ -8,10 +8,9 @@ import { ShoppingCart } from "lucide-react";
 import MotionButton from "../ui/MotionButton";
 import { UUID } from "crypto";
 import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
-import { useUserQuery } from "../queries/useUserQuery";
-import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import ImageLoader from "../ui/ImageLoader";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 type HomePageProductCardProps = {
   product: Product;
@@ -19,11 +18,10 @@ type HomePageProductCardProps = {
 
 function HomePageProductCard({ product }: HomePageProductCardProps) {
   const addMutation = useAddShoppingCartPosition();
-  const userQuery = useUserQuery();
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const { user } = useAuthUser();
 
   const handleBuyButton = (productId: UUID) => {
-    if (userQuery.data?.name && cookies.access_token) {
+    if (user) {
       addMutation.mutate({ productId, amount: 1 });
     } else {
       toast.error("Für diese Funktion müssen Sie sich anmelden.");

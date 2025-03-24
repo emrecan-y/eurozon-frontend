@@ -1,4 +1,4 @@
-import { useGetOrders } from "../queries/useOrdersQuery";
+import { useGetOrders } from "../../queries/useOrdersQuery";
 import OrderHistoryElement from "./OrderHistoryElement";
 
 function OrderHistory() {

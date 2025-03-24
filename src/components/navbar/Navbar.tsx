@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useGetShoppingCartPositions } from "../queries/useShoppingCartQuerys";
+import { useGetShoppingCartPositions } from "../../queries/useShoppingCartQuerys";
 import useDarkMode from "../../hooks/useDarkMode";
 import { useAuthUser } from "../../hooks/useAuthUser";
 

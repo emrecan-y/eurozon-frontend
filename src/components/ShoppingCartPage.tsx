@@ -3,8 +3,8 @@ import {
   useGetShoppingCartPositions,
   useRemoveShoppingCartPosition,
   useUpdateShoppingCartPosition,
-} from "./queries/useShoppingCartQuerys";
-import { useAddOrders } from "./queries/useOrdersQuery";
+} from "../queries/useShoppingCartQuerys";
+import { useAddOrders } from "../queries/useOrdersQuery";
 import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
 import NumberInputWithIncrement from "./ui/NumberInputWithIncrement";

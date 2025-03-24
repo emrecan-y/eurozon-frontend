@@ -1,5 +1,5 @@
 import { Product } from "@/models/product";
-import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
+import { useAddShoppingCartPosition } from "../../queries/useShoppingCartQuerys";
 import { UUID } from "crypto";
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";

@@ -7,7 +7,7 @@ import {
 import { ShoppingCart } from "lucide-react";
 import MotionButton from "../ui/MotionButton";
 import { UUID } from "crypto";
-import { useAddShoppingCartPosition } from "../queries/useShoppingCartQuerys";
+import { useAddShoppingCartPosition } from "../../queries/useShoppingCartQuerys";
 import { toast } from "react-toastify";
 import ImageLoader from "../ui/ImageLoader";
 import { useAuthUser } from "../../hooks/useAuthUser";

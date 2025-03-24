@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { CheckIcon, Search, X } from "lucide-react";
-import { useMainCategoriesQuery } from "../queries/useMainCategoriesQuery";
+import { useMainCategoriesQuery } from "../../queries/useMainCategoriesQuery";
 
 function NavBarSearchBar() {
   const [category, setCategory] = useState("");
@@ -48,7 +48,7 @@ function NavBarSearchBar() {
   return (
     <form
       onSubmit={(e) => searchSubmit(e)}
-      className="bg-primary-bg-1 text-primary-text-1 border-primary-bg-1 col-span-2 flex w-full rounded-full border-2 px-2 py-0.5 shadow-md md:col-span-1 md:col-start-2 md:row-start-1"
+      className="col-span-2 flex w-full rounded-full border-2 border-primary-bg-1 bg-primary-bg-1 px-2 py-0.5 text-primary-text-1 shadow-md md:col-span-1 md:col-start-2 md:row-start-1"
     >
       <div className="flex items-center justify-center">
         <Select
@@ -61,7 +61,7 @@ function NavBarSearchBar() {
           <SelectTrigger className="w-fit border-0 text-xs outline-none sm:text-sm">
             <SelectValue placeholder="Alle Kategorien" />
           </SelectTrigger>
-          <SelectContent className="bg-primary-bg-2 primary-bg-3 text-primary-text-2 border-2 shadow-lg">
+          <SelectContent className="primary-bg-3 border-2 bg-primary-bg-2 text-primary-text-2 shadow-lg">
             <SelectGroup>
               <SelectItem
                 key={`search-bar-category-all`}
@@ -91,7 +91,7 @@ function NavBarSearchBar() {
         </Select>
       </div>
       <input
-        className="bg-primary-bg-1 h-full w-full p-0 px-1 text-xs outline-none focus:outline-none md:text-sm"
+        className="h-full w-full bg-primary-bg-1 p-0 px-1 text-xs outline-none focus:outline-none md:text-sm"
         type="text"
         placeholder="Search.."
         value={searchText}
@@ -106,10 +106,10 @@ function NavBarSearchBar() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "linear" }}
             >
-              <X className="stroke-accent-1 h-7 w-7" />
+              <X className="h-7 w-7 stroke-accent-1" />
             </MotionButton>
           </TooltipTrigger>
-          <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
+          <TooltipContent className="rounded-lg bg-primary-bg-3 p-1 text-xs text-primary-text-3">
             <p>Delete Entry</p>
           </TooltipContent>
         </Tooltip>
@@ -118,10 +118,10 @@ function NavBarSearchBar() {
       <Tooltip>
         <TooltipTrigger asChild className="w-fit">
           <MotionButton type="submit">
-            <Search className="stroke-accent-1 h-7 w-7 p-0.5" />
+            <Search className="h-7 w-7 stroke-accent-1 p-0.5" />
           </MotionButton>
         </TooltipTrigger>
-        <TooltipContent className="bg-primary-bg-3 text-primary-text-3 rounded-lg p-1 text-xs">
+        <TooltipContent className="rounded-lg bg-primary-bg-3 p-1 text-xs text-primary-text-3">
           <p>Search</p>
         </TooltipContent>
       </Tooltip>

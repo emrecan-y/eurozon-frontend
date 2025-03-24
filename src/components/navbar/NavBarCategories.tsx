@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useMainCategoriesQuery } from "../queries/useMainCategoriesQuery";
+import { useMainCategoriesQuery } from "../../queries/useMainCategoriesQuery";
 import NavBarCategoryButton from "./NavBarCategoryButton";
 
 function NavBarCategories() {

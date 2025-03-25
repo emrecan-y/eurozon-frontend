@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MotionButton from "../ui/MotionButton";
 import { useEffect, useState } from "react";
 import { Category } from "@/models/category";
-import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 type NavBarCategoryButtonProps = {

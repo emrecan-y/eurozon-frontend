@@ -1,15 +1,8 @@
 import { getProducts, getTopProducts } from "@/api/api";
 import { Product } from "@/models/product";
 import { useEffect, useState } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import HomePageProductCard from "./HomePageProductCard";
 import axios from "axios";
+import HomePageCarousel from "./HomePageCarousel";
 
 function HomePage() {
   const [topList, setTopList] = useState<Product[]>();
@@ -22,7 +15,7 @@ function HomePage() {
     getProducts({
       category: "technik",
       searchString: "",
-      size: 12,
+      size: 10,
       page: 1,
       cancelToken: source.token,
     }).then((e) => {
@@ -31,7 +24,7 @@ function HomePage() {
     getProducts({
       category: "sport",
       searchString: "",
-      size: 12,
+      size: 10,
       page: 1,
       cancelToken: source.token,
     }).then((e) => {
@@ -40,7 +33,7 @@ function HomePage() {
     getProducts({
       category: "lebensmittel",
       searchString: "",
-      size: 12,
+      size: 10,
       page: 1,
       cancelToken: source.token,
     }).then((e) => {
@@ -51,49 +44,12 @@ function HomePage() {
     });
   }, []);
 
-  const ProductCarousel = ({
-    products,
-    title,
-  }: {
-    products?: Product[];
-    title: string;
-  }) => (
-    <div className="w-full max-w-72 md:max-w-2xl lg:max-w-7xl lg:py-2">
-      <h2 className="mb-4 text-lg font-bold lg:text-2xl">{title}</h2>
-      {products && products.length > 0 ? (
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-            dragFree: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {products.map((product) => (
-              <CarouselItem
-                key={product.id}
-                className="basis-2/4 md:basis-2/6 lg:basis-1/5"
-              >
-                <HomePageProductCard product={product} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      ) : (
-        <p>Keine Produkte verfügbar</p>
-      )}
-    </div>
-  );
-
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <ProductCarousel products={topList} title="Unsere Topseller" />
-      <ProductCarousel products={technikList} title="Technik" />
-      <ProductCarousel products={sportList} title="Sport" />
-      <ProductCarousel products={lebensmittelList} title="Lebensmittel" />
+    <div className="flex max-w-full flex-1 flex-col gap-8 px-2 py-4 md:p-8">
+      <HomePageCarousel products={topList} title="Unsere Topseller" />
+      <HomePageCarousel products={technikList} title="Technik" />
+      <HomePageCarousel products={sportList} title="Sport" />
+      <HomePageCarousel products={lebensmittelList} title="Lebensmittel" />
     </div>
   );
 }

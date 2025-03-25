@@ -78,6 +78,7 @@ function ProductGrid() {
                     <ProductGridElement
                       product={p}
                       key={p.id}
+                      showButton
                     ></ProductGridElement>
                   ))}
             </div>
